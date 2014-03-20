@@ -49,7 +49,7 @@ def register_producer():
     open_port2 = pick_unused_port()
     #spawn_demon("/usr/bin/say", "/Users/alehins/Documents/StAndrews/CT/MobileMiddleware/server.py -p " + str(open_port))
     #spawn_demon("say hi")
-    cmd = ['/usr/bin/python', "/Users/alehins/Documents/StAndrews/CT/MobileMiddleware/server.py", "-p" + str(open_port), "-t" + str(open_port2)]
+    cmd = ['python', "server.py", "-p" + str(open_port), "-t" + str(open_port2)]
     # cmd = ['python', "D:\Andrew\Documents\GitHub\MobileMiddleware\server.py", "-p" + str(open_port), "-t" + str(open_port2)]
     subprocess.Popen(cmd)
     #spawn_daemon(cmd)
