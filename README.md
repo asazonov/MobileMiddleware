@@ -3,9 +3,9 @@ MobileMiddleware
 
 Communication is done through HTTP and Websockets. 
 
-HTTP -- "requests" library and flask framework
-Websockets -- autobahn
-Geopy -- geocoding and distances
+* HTTP -- "requests" library and flask framework
+* Websockets -- autobahn
+* Geopy -- geocoding and distances
 
 All should be available through pip.
 
