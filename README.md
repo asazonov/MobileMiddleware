@@ -12,6 +12,7 @@ All should be available through pip.
 20.03 – Alexey:
 
 1) Added initial structure to the repository. Autobahn's tutorial code was used for the basic client and server (http://autobahn.ws/python/tutorials/pubsub/).
+
 2) An alpha version of registry was implemented. The registry is a flask-based app (no need for fancy websocket stuff, as far as I can tell). Providers can register themselves. Clients can requests providers. Client-provider communication is done through servers (brokers?). Broker serves info from the provider to multiple clients through WAMP's (http://wamp.ws/) pubsub.
 
 Stuff implemented:
