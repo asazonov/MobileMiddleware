@@ -8,6 +8,7 @@ Communication is done through HTTP and Websockets.
 * Geopy -- geocoding and distances
 
 All should be available through pip.
+(so to recap, install: requests, flask, autobahn, geopy)
 
 20.03 – Alexey:
 
@@ -20,7 +21,7 @@ Stuff implemented:
 Sample request:
 
 ```
-http://0.0.0.0:5000/register_producer?sensors=camera,microphone,location&lat=55.755826&lng=37.6173
+http://127.0.0.1:5000/register_producer?sensors=camera,microphone,location&lat=55.755826&lng=37.6173
 ```
 
 Sample response:
@@ -34,7 +35,7 @@ Sample response:
 Sample request:
 
 ```
-GET http://0.0.0.0:5000/request_broker?broker_param=Erevan
+GET http://127.0.0.1:5000/request_broker?broker_param=Erevan
 ```
 
 The request should be extended to take sensor list as a parameter.
@@ -56,7 +57,7 @@ python registry.py
 Run client:
 
 ```
-python client.py -r http://0.0.0.0:5000 -p Warsaw -c location, sound # address of the registry, location of interest, sensors (channels) -- currently ignored  
+python client.py -r http://127.0.0.1:5000 -p Warsaw -c location, sound # address of the registry, location of interest, sensors (channels) -- currently ignored  
 ```
 
 There should be no need to run the server individually (the registry should handle this).

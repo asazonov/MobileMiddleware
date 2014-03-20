@@ -6,7 +6,7 @@ from geopy.point import Point
 from operator import itemgetter
 import datetime
 import time
-from aux import pick_unused_port, spawn_daemon
+from helper import pick_unused_port, spawn_daemon
 import subprocess
 
 producer_list = []
@@ -50,6 +50,7 @@ def register_producer():
     #spawn_demon("/usr/bin/say", "/Users/alehins/Documents/StAndrews/CT/MobileMiddleware/server.py -p " + str(open_port))
     #spawn_demon("say hi")
     cmd = ['/usr/bin/python', "/Users/alehins/Documents/StAndrews/CT/MobileMiddleware/server.py", "-p" + str(open_port), "-t" + str(open_port2)]
+    # cmd = ['python', "D:\Andrew\Documents\GitHub\MobileMiddleware\server.py", "-p" + str(open_port), "-t" + str(open_port2)]
     subprocess.Popen(cmd)
     #spawn_daemon(cmd)
     access_time = datetime.datetime.now()
@@ -105,4 +106,4 @@ if __name__ == "__main__":
     #producer_list.append(b)
 
     app.debug = True
-    app.run(host='0.0.0.0')
+    app.run(host='127.0.0.1')
