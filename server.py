@@ -28,6 +28,7 @@ from autobahn.twisted.websocket import listenWS
 from autobahn.wamp1.protocol import WampServerFactory, \
                                     WampServerProtocol
 
+import argparse
 
 
 class MyPubSubServerProtocol(WampServerProtocol):
@@ -49,16 +50,23 @@ if __name__ == '__main__':
 
    log.startLogging(sys.stdout)
 
-   ## our WAMP/WebSocket server
-   ##
-   wampFactory = WampServerFactory("ws://localhost:9000", debugWamp = True)
+   parser = argparse.ArgumentParser()
+   parser.add_argument('-p', '--port', type=str)
+   parser.add_argument('-t', '--tcp', type=int)
+
+   args = parser.parse_args()
+
+   port = args.port
+   tcp = args.tcp
+
+   wampFactory = WampServerFactory("ws://localhost:" + str(port), debugWamp = True)
    wampFactory.protocol = MyPubSubServerProtocol
    listenWS(wampFactory)
 
    ## our Web server (for static Web content)
    ##
    webFactory = Site(File("."))
-   reactor.listenTCP(8080, webFactory)
+   reactor.listenTCP(int(tcp), webFactory)
 
    ## run the Twisted network reactor
    ##
