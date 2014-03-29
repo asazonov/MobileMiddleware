@@ -11,6 +11,8 @@ All should be available through pip.
 (so to recap, install: requests, flask, autobahn, geopy)
 
 20.03 – Alexey:
+================
+
 
 1) Added initial structure to the repository. Autobahn's tutorial code was used for the basic client and server (http://autobahn.ws/python/tutorials/pubsub/).
 
@@ -64,5 +66,33 @@ There should be no need to run the server individually (the registry should hand
 
 Haven't touched the provider code yet. The broker will probably require more work.
 
+28.03 – Alexey:
+================
+
+
+A basic producer was implemented. 
+
+```
+python producer.py -r http://127.0.0.1:5000 -s camera,microphone,location --lat 51.755826", --lng 37.6173 
+```
+
+The producer advertises its availability to the registry. The registry spawns a broker and returns the broker's address to the producer. Producer connects to the broker and begins publishing. At the moment, it sends dummy messages every two seconds. 
+
+The code was tested -- multiple clients can get the messages from the same subscriber through a single connection. Thus, broadcasting seems to work. 
+
+29.03 – Alexey:
+================
+
+Dummy data generator for producer. Producer now publishes data to channels corresponding to sensors it has. 
+
+
+TODO
+================
+
+* The producer only publishes to one channel, sending demo data. It should have some protocol for publishing relevant stuff to relevant channels. 
+* request_broker in the registry in the Registry has a list of sensors hardwired -- needs a fix. Generally, need to make sure that nothing is hardwired.
+* Start handling errors gracefully (e.g. no appropriate producer).
+* Start implementing the tests.
+* Report is important. Diagrams, justifications, etc. 
 
 
