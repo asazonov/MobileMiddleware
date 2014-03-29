@@ -25,13 +25,18 @@ from autobahn.twisted.websocket import connectWS
 
 from autobahn.wamp1.protocol import WampClientFactory, \
                                     WampClientProtocol
+import argparse
+import random
+import requests
+import json
+import time
 
-
-def advertise_availability(registry_address,available_sensorts):
-   payload = {'broker_param': request_parameters}
-   req = requests.get(registry_address+"/request_broker", params=payload)
+def advertise_availability(registry_address, available_sensors, lat, lng):
+   payload = {'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
+   req = requests.get(registry_address+"/register_producer", params=payload)
    response_json = req.text
    response = json.loads(response_json)
+   time.sleep(2) # a dirty hack. We need to give time for the broker to initialise
    return response["broker_address"]
 
 
@@ -69,16 +74,18 @@ class MyPubSubClientProtocol(WampClientProtocol):
       reactor.stop()
 
 
-
 if __name__ == '__main__':
 
    log.startLogging(sys.stdout)
 
-   if len(sys.argv) > 1:
-      wsuri = sys.argv[1]
-   else:
-      wsuri = "ws://localhost:9000"
+   parser = argparse.ArgumentParser()
+   #parser.add_argument('-t', '--tcp', type=int)
+   parser.add_argument('-r', '--registry', type=str)
+   parser.add_argument('-s', '--sensors')
 
+   args = parser.parse_args()
+
+   wsuri = advertise_availability(args.registry, args.sensors, 55.755826 + random.random() * 3, 37.6173 + random.random() * 3)
    print "Connecting to", wsuri
 
    ## our WAMP/WebSocket client

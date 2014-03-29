@@ -26,6 +26,8 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
       for channel in channels:
          self.subscribe(channel, default_response)
 
+      self.subscribe("http://example.com/myEvent1", default_response) # hardwired for testing
+
 def request_broker_address(registry_address,request_parameters):
    payload = {'broker_param': request_parameters}
    req = requests.get(registry_address+"/request_broker", params=payload)
