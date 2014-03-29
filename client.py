@@ -24,9 +24,11 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
          print "Received event", topic, event
 
       for channel in channels:
+         print channel
          self.subscribe(channel, default_response)
 
-      self.subscribe("http://example.com/myEvent1", default_response) # hardwired for testing
+      #self.subscribe("location", default_response)
+      #self.subscribe("http://example.com/myEvent1", default_response) # hardwired for testing
 
 def request_broker_address(registry_address,request_parameters):
    payload = {'broker_param': request_parameters}
@@ -42,12 +44,12 @@ if __name__ == '__main__':
 
    parser = argparse.ArgumentParser()
    parser.add_argument('-r', '--registry', type=str)
-   parser.add_argument('-c', '--channels', nargs='+', type=str)
+   parser.add_argument('-c', '--channels') #, nargs='+', type=str)
    parser.add_argument('-p', '--parameters', type=str)
 
    args = parser.parse_args()
 
-   channels = args.channels
+   channels = args.channels.split(",")
    parameters = args.parameters
    registry_address = args.registry
 

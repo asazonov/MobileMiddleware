@@ -42,7 +42,10 @@ class MyPubSubServerProtocol(WampServerProtocol):
       ## register a single fixed URI as PubSub topic that our
       ## message broker will handle
       ##
-      self.registerForPubSub("http://example.com/myEvent1")
+      self.registerForPubSub("camera")
+      self.registerForPubSub("location")
+      self.registerForPubSub("speed")
+      #self.registerForPubSub("http://example.com/myEvent1")
 
 
 

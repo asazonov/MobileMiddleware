@@ -30,6 +30,12 @@ import random
 import requests
 import json
 import time
+import datetime
+import random
+import string
+
+def generate_random_data(size=30, chars=string.ascii_letters + string.digits):
+   return ''.join(random.choice(chars) for _ in range(size))
 
 def advertise_availability(registry_address, available_sensors, lat, lng):
    payload = {'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
@@ -52,21 +58,28 @@ class MyPubSubClientProtocol(WampClientProtocol):
       def onMyEvent1(topic, event):
          print "Received event", topic, event
 
-      self.subscribe("http://example.com/myEvent1", onMyEvent1)
+      #self.subscribe("http://example.com/myEvent1", onMyEvent1)
 
       self.counter = 0
 
-      def sendMyEvent1():
-         self.counter += 1
-         self.publish("http://example.com/myEvent1",
+      def start_publishing_sensor(sensor_name, every_n_seconds, lat, lng):
+         self.publish(sensor_name,
             {
-               "msg": "Hello from Python!",
-               "counter": self.counter
+               "sensor" : sensor_name,
+               "data" : generate_random_data(),
+               "timestamp" : str(datetime.datetime.now()),
+               "lat" : str(lat),
+               "lng" : str(lng)
+
             }
          )
-         reactor.callLater(2, sendMyEvent1)
+         reactor.callLater(every_n_seconds, start_publishing_sensor, sensor_name=sensor_name, every_n_seconds=every_n_seconds, lat=lat, lng=lng)
 
-      sendMyEvent1()
+      for sensor in sensors:
+         self.subscribe(sensor, onMyEvent1)
+         start_publishing_sensor(sensor, 0.1, lat, lng)
+      
+      #start_publishing_sensor("http://example.com/myEvent1", 0.1, lat, lng)
 
 
    def onClose(self, wasClean, code, reason):
@@ -82,8 +95,17 @@ if __name__ == '__main__':
    #parser.add_argument('-t', '--tcp', type=int)
    parser.add_argument('-r', '--registry', type=str)
    parser.add_argument('-s', '--sensors')
+   parser.add_argument('-x', '--lat')
+   parser.add_argument('-y', '--lng')
+
+
 
    args = parser.parse_args()
+
+   sensors = args.sensors.split(",")
+   lat = args.lat
+   lng = args.lng
+
 
    wsuri = advertise_availability(args.registry, args.sensors, 55.755826 + random.random() * 3, 37.6173 + random.random() * 3)
    print "Connecting to", wsuri
