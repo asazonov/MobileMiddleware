@@ -81,6 +81,7 @@ The producer advertises its availability to the registry. The registry spawns a 
 The code was tested -- multiple clients can get the messages from the same subscriber through a single connection. Thus, broadcasting seems to work. 
 
 29.03 – Alexey:
+================
 
 Dummy data generator for producer. Producer now publishes data to channels corresponding to sensors it has. 
 
