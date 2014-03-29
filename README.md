@@ -73,12 +73,17 @@ Haven't touched the provider code yet. The broker will probably require more wor
 A basic producer was implemented. 
 
 ```
-python producer.py -r http://127.0.0.1:5000 -s camera,microphone,location
+python producer.py -r http://127.0.0.1:5000 -s camera,microphone,location --lat 51.755826", --lng 37.6173 
 ```
 
 The producer advertises its availability to the registry. The registry spawns a broker and returns the broker's address to the producer. Producer connects to the broker and begins publishing. At the moment, it sends dummy messages every two seconds. 
 
 The code was tested -- multiple clients can get the messages from the same subscriber through a single connection. Thus, broadcasting seems to work. 
+
+29.03 – Alexey:
+
+Dummy data generator for producer. Producer now publishes data to channels corresponding to sensors it has. 
+
 
 TODO
 ================
