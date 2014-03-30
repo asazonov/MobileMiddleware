@@ -7,7 +7,19 @@ It was decided that a producer must send the data only to one source. Implementi
 
 # Design
 
+## Components
+### Registry
+### Broker
+### Producer
+### Consumer
+
 # Implementation
+
+## Components
+### Registry
+### Broker
+### Producer
+### Consumer
 
 # Testing
  
