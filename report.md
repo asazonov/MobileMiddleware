@@ -15,6 +15,10 @@ It was decided that a producer must send the data only to one source. Implementi
 
 # Implementation
 
+## Key technologies
+*WebSockets* 
+*REST* 
+
 ## Components
 ### Registry
 ### Broker
@@ -24,5 +28,7 @@ It was decided that a producer must send the data only to one source. Implementi
 # Testing
  
 # Reproducing tests
+
+# Future work
 
 # Conclusion
