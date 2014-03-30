@@ -16,7 +16,9 @@ It was decided that a producer must send the data only to one source. Implementi
 # Implementation
 
 ## Key technologies
-*WebSockets* 
+
+*WebSockets*
+
 *REST* 
 
 ## Components
