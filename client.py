@@ -26,9 +26,10 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
          print "Received event", topic, event
 
       io_file = open("output/" + str(os.getpid()) + ".csv", 'w+')
+      io_file.write("sensor,lat,lng,data,timestamp,time\n")
       
       def save_to_file(topic, event):
-         io_file.write(str(str(event['sensor']) + "," + event['lat']) + "," + str(event['lng']) + "," + str(event['data']) + "," + str(event['timestamp']) + "," + str(datetime.datetime.now() - datetime.datetime.strptime(event['timestamp'], "%Y-%m-%d %H:%M:%S.%f")) + "\n")
+         io_file.write(str(str(event['sensor']) + "," + event['lat']) + "," + str(event['lng']) + "," + str(event['data']) + "," + str(event['timestamp']) + "," + str((datetime.datetime.now() - datetime.datetime.strptime(event['timestamp'], "%Y-%m-%d %H:%M:%S.%f")).total_seconds()) + "\n")
 
       for channel in channels:
          print channel

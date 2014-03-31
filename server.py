@@ -62,7 +62,7 @@ if __name__ == '__main__':
    port = args.port
    tcp = args.tcp
 
-   wampFactory = WampServerFactory("ws://localhost:" + str(port), debugWamp = True)
+   wampFactory = WampServerFactory("ws://localhost:" + str(port), debugWamp = False)
    wampFactory.protocol = MyPubSubServerProtocol
    listenWS(wampFactory)
 
