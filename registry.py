@@ -13,7 +13,7 @@ producer_list = []
 
 class Producer(object):
     """docstring for Sensor"""
-    def __init__(self, sensors, location, lat, lng, access_time, broker_address):
+    def __init__(self, sensors, lat, lng, access_time, broker_address):
         super(Producer, self).__init__()
         self.sensors = sensors
         #self.location = location
@@ -90,7 +90,7 @@ def request_brokers():
     response = []
     if (relevant_producers):
         for producer in relevant_producers:
-            response.append({"broker_address" : producer.broker_address, "location" : producer.location, "lat" : producer.lat, "lng" : producer.lng})
+            response.append({"broker_address" : producer.broker_address, "lat" : producer.lat, "lng" : producer.lng})
 
     response_json = json.dumps(response)
     print "I AM RETURNING: " + str(response_json)

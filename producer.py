@@ -77,7 +77,7 @@ class MyPubSubClientProtocol(WampClientProtocol):
 
       for sensor in sensors:
          self.subscribe(sensor, onMyEvent1)
-         start_publishing_sensor(sensor, 0.1, lat, lng)
+         start_publishing_sensor(sensor, 1, lat, lng)
       
       #start_publishing_sensor("http://example.com/myEvent1", 0.1, lat, lng)
 
