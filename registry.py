@@ -1,7 +1,7 @@
 from flask import Flask, request
 app = Flask(__name__)
 import json
-from geopy import geocoders, distance
+from geopy import geocoders, distance as geopy_distance
 from geopy.point import Point
 from operator import itemgetter
 import datetime
@@ -92,8 +92,13 @@ def request_brokers():
     max_brokers = request.args.get('max_brokers', type=int)
     radius = request.args.get('radius', type=int)
 
-    geocoder = geocoders.GoogleV3()
-    place, (lat, lng) = geocoder.geocode(location) 
+    if (location != None):
+        geocoder = geocoders.GoogleV3()
+        place, (lat, lng) = geocoder.geocode(location) 
+    else:
+        lat = request.args.get('lat', type=str)
+        lng = request.args.get('lng', type=str)
+
     relevant_producers = get_relevant_producers(["location"], lat, lng, radius, max_brokers)
 
     response = []
@@ -112,8 +117,6 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
 
     now = datetime.datetime.now()
 
-
-
     for producer in producers.values():
 
         if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
@@ -122,7 +125,7 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
 
         if (current < max):
             prod_location = Point(producer.lat, producer.lng)
-            distance = distance.distance(centre, prod_location).miles
+            distance = geopy_distance.distance(centre, prod_location).miles
             if set(sensors).issubset(set(producer.sensors)) and distance <= radius:
                 relevant_producers.append(producer)
                 current += 1
@@ -143,7 +146,7 @@ def get_best_producer(sensors, lat, lng):
     requested_point = Point(lat,lng)
     for producer in appropriate_producers:
         producer_point = Point(producer.lat,producer.lng)
-        distance_miles = distance.distance(requested_point, producer_point).miles 
+        distance_miles = geopy_distance.distance(requested_point, producer_point).miles 
         appropriate_producers_distance.append(distance_miles)
     #index of the smallest item in the list (thus, the closest producer)
     min_distance_index = min(enumerate(appropriate_producers_distance), key=itemgetter(1))[0] 
@@ -159,5 +162,5 @@ if __name__ == "__main__":
     #producers.append(a)
     #producers.append(b)
 
-    app.debug = False
+    app.debug = True
     app.run(host='127.0.0.1')

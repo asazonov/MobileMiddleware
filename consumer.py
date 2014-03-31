@@ -48,20 +48,19 @@ def request_broker_address(registry_address,location):
    response = json.loads(response_json)
    return response["broker_address"]
 
-def request_brokers(registry_address, location, radius, max_brokers):
+def request_brokers_l(registry_address, location, radius, max_brokers):
    payload = {'location': location, 'max_brokers' : max_brokers, 'radius' : radius}
    req = requests.get(registry_address + "/request_brokers", params=payload)
    response_json = req.text
-   print "THIS IS IT HERE!!!!!!: " + req.text
-   
    response = json.loads(response_json)
-   # TODO: parse JSON response
-      # if nothing valid, wait a while and then request again
-      # else, for each broker in json
-      #broker_list.append(broker)
-
    return response
 
+def request_brokers_xy(registry_address, lat, lng, radius, max_brokers):
+   payload = {'lat': lat, 'lng' : lng, 'max_brokers' : max_brokers, 'radius' : radius}
+   req = requests.get(registry_address + "/request_brokers", params=payload)
+   response_json = req.text
+   response = json.loads(response_json)
+   return response
 
 if __name__ == '__main__':
 
@@ -72,36 +71,39 @@ if __name__ == '__main__':
    parser.add_argument('-c', '--channels') #, nargs='+', type=str)
    parser.add_argument('-l', '--location', type=str)
    parser.add_argument('-b', '--maxbrokers', type=int)
-   parser.add_argument('-x', '--radius', type=int)
+   parser.add_argument('-d', '--radius', type=int)
+   parser.add_argument('-x', '--lat', type=str)
+   parser.add_argument('-y', '--lng', type=str)
 
    args = parser.parse_args()
 
    channels = args.channels.split(",")
    location = args.location
+   lat = args.lat
+   lng = args.lng
    registry_address = args.registry
    max_brokers = args.maxbrokers
    radius = args.radius
 
-   ## our WAMP/WebSocket client
-   ##
- 
-   # ## TEST VERSION - makes 10 connections with one broker
-   # wsuri = request_broker_address(registry_address, parameters)
-   # print "Connecting to", wsuri
-   # for i in range(0,10):
-   #    factory = WampClientFactory(wsuri, debugWamp = False)
-   #    factory.protocol = SensorDataConsumerClientProtocol
-   #    connectWS(factory) 
-   
-   ## ACTUAL VERSION - loops through brokers in broker list, connecting to each
-   broker_list = request_brokers(registry_address, location, radius, max_brokers)
+   #######################################
+   ##    SHOULD PUT SOMETHING HERE TO   ##
+   ##    CHECK COMMAND ARGS AND QUIT    ##
+   ##       IF THEY AREN'T CORRECT      ##
+   #######################################
+
+   ## loops through brokers in broker list, connecting to each
+   if (location != None):
+      broker_list = request_brokers_l(registry_address, location, radius, max_brokers)
+   else:
+      if (lat == None or lng == None):
+         print "ERROR - must have either location (-l) or latitude (-x) and longitude (-y)"
+         exit()
+      broker_list = request_brokers_xy(registry_address, lat, lng, radius, max_brokers)
    
    if (broker_list):
-
       io_file = open("output/" + str(os.getpid()) + ".csv", 'w+')
       io_file.write("sensor,lat,lng,data,timestamp,time\n")
       for broker in broker_list:
-         # print "## BROKER ADDRESS = " + broker['broker_address'] + " ##"
          wsuri = broker['broker_address']
          print "Connecting to", wsuri
          factory = WampClientFactory(wsuri, debugWamp = False)

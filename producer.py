@@ -29,6 +29,9 @@ producer_id = generate_random_data() # 30 characters, letters + digists. Probabl
 def advertise_availability():
    payload = {'producer_id' : producer_id, 'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
    req = requests.get(registry_address+"/register_producer", params=payload)
+
+   print "###PAYLOAD### " + str(payload) + " ###########"
+
    response_json = req.text
    response = json.loads(response_json)
    time.sleep(2) # a dirty hack. We need to give time for the broker to initialise
@@ -89,9 +92,9 @@ if __name__ == '__main__':
    parser = argparse.ArgumentParser()
    #parser.add_argument('-t', '--tcp', type=int)
    parser.add_argument('-r', '--registry', type=str)
-   parser.add_argument('-s', '--sensors')
-   parser.add_argument('-x', '--lat')
-   parser.add_argument('-y', '--lng')
+   parser.add_argument('-s', '--sensors', type=str)
+   parser.add_argument('-x', '--lat', type=str)
+   parser.add_argument('-y', '--lng', type=str)
 
 
 
@@ -102,7 +105,7 @@ if __name__ == '__main__':
    lng = args.lng
 
    registry_address = args.registry
-   available_sensors = args.sensors, 
+   available_sensors = args.sensors
    lat = args.lat
    lng = args.lng
 
