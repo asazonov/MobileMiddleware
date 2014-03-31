@@ -56,7 +56,8 @@ def register_producer():
     access_time = datetime.datetime.now()
     broker_address = "ws://localhost:" + str(open_port)
 
-    producer = Producer(sensors, location, lat, lng, access_time, broker_address)
+    producer = Producer(sensors, lat, lng, access_time, broker_address)
+    # producer = Producer(sensors, location, lat, lng, access_time, broker_address)
     producer_list.append(producer)
 
     response = {"broker_address" : broker_address, "http_port" : open_port2}
@@ -82,7 +83,6 @@ def request_brokers():
     broker_param = request.args.get('broker_param', type=str)
     max_brokers = request.args.get('max_brokers', type=int)
 
-    print "max_brokers:", max_brokers
     geocoder = geocoders.GoogleV3()
     place, (lat, lng) = geocoder.geocode(broker_param) 
     relevant_producers = get_relevant_producers(["location"], lat, lng, max_brokers)
@@ -98,9 +98,15 @@ def request_brokers():
 
 def get_relevant_producers(sensors, lat, lng, max):
     relevant_producers = []
+    current = 0
+
     for producer in producer_list:
-        if set(sensors).issubset(set(producer.sensors)):
-            relevant_producers.append(producer)
+        if (current < max):
+            if set(sensors).issubset(set(producer.sensors)):
+                relevant_producers.append(producer)
+                current += 1
+        else:
+            break
 
     return relevant_producers
 
