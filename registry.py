@@ -77,9 +77,36 @@ def request_broker():
     response_json = json.dumps(response)
     return response_json
 
+@app.route("/request_brokers", methods=['GET'])
+def request_brokers():
+    broker_param = request.args.get('broker_param', type=str)
+    max_brokers = request.args.get('max_brokers', type=int)
+
+    print "max_brokers:", max_brokers
+    geocoder = geocoders.GoogleV3()
+    place, (lat, lng) = geocoder.geocode(broker_param) 
+    relevant_producers = get_relevant_producers(["location"], lat, lng, max_brokers)
+
+    response = []
+    if (relevant_producers):
+        for producer in relevant_producers:
+            response.append({"broker_address" : producer.broker_address, "location" : producer.location, "lat" : producer.lat, "lng" : producer.lng})
+
+    response_json = json.dumps(response)
+    print "I AM RETURNING: " + str(response_json)
+    return response_json
+
+def get_relevant_producers(sensors, lat, lng, max):
+    relevant_producers = []
+    for producer in producer_list:
+        if set(sensors).issubset(set(producer.sensors)):
+            relevant_producers.append(producer)
+
+    return relevant_producers
+
 def get_best_producer(sensors, lat, lng):
     # list of producers that have the requested sensors
-    appropriate_producers = [] 
+    appropriate_producers = []
     for producer in producer_list:
         if set(sensors).issubset(set(producer.sensors)):
             appropriate_producers.append(producer)

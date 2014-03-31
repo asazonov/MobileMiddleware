@@ -48,14 +48,17 @@ def request_broker_address(registry_address,request_parameters):
    response = json.loads(response_json)
    return response["broker_address"]
 
-def request_brokers(registry_address, request_parameters):
-   payload = {'broker_param': request_parameters}
-   req = requests.get(registry_address + "/request_brokers", params=payload+"&maxbrokers="+max_brokers)
+def request_brokers(registry_address, request_parameters, max_brokers):
+   payload = {'broker_param': request_parameters, 'max_brokers' : max_brokers}
+   req = requests.get(registry_address + "/request_brokers", params=payload)
    response_json = req.text
+   response = json.loads(response_json)
    # TODO: parse JSON response
       # if nothing valid, wait a while and then request again
       # else, for each broker in json
       #broker_list.append(broker)
+
+   return response
 
 
 if __name__ == '__main__':
@@ -77,22 +80,22 @@ if __name__ == '__main__':
 
    ## our WAMP/WebSocket client
    ##
-
-   ## TEST VERSION - makes 10 connections with one broker
-   wsuri = request_broker_address(registry_address, parameters)
-   print "Connecting to", wsuri
-   for i in range(0,10):
-      factory = WampClientFactory(wsuri, debugWamp = False)
-      factory.protocol = SensorDataConsumerClientProtocol
-      connectWS(factory) 
-   
-   # ## ACTUAL VERSION - loops through brokers in broker list, connecting to each
-   # broker_list = request_brokers(registry_address, parameters, max_brokers)
-   # for broker_address in broker_list:
-   #    wsuri = broker_address
-   #    print "Connecting to", wsuri
+ 
+   # ## TEST VERSION - makes 10 connections with one broker
+   # wsuri = request_broker_address(registry_address, parameters)
+   # print "Connecting to", wsuri
+   # for i in range(0,10):
    #    factory = WampClientFactory(wsuri, debugWamp = False)
    #    factory.protocol = SensorDataConsumerClientProtocol
-   #    connectWS(factory)
+   #    connectWS(factory) 
+   
+   ## ACTUAL VERSION - loops through brokers in broker list, connecting to each
+   broker_list = request_brokers(registry_address, parameters, max_brokers)
+   for broker in broker_list:
+      wsuri = broker['broker_address']
+      print "Connecting to", wsuri
+      factory = WampClientFactory(wsuri, debugWamp = False)
+      factory.protocol = SensorDataConsumerClientProtocol
+      connectWS(factory)
    
    reactor.run()
