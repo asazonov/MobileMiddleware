@@ -15,6 +15,7 @@ import time
 import datetime
 import random
 import string
+import constants
 
 def generate_random_data(size=30, chars=string.ascii_letters + string.digits):
    return ''.join(random.choice(chars) for _ in range(size))
@@ -70,7 +71,7 @@ class MyPubSubClientProtocol(WampClientProtocol):
       def heartbeat():
          print "Heartbeat"
          advertise_availability()
-         reactor.callLater(3, heartbeat)
+         reactor.callLater(constants.HEARTBEAT_RATE, heartbeat)
 
       heartbeat()
       #start_publishing_sensor("http://example.com/myEvent1", 0.1, lat, lng)
