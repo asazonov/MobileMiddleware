@@ -19,8 +19,14 @@ import string
 def generate_random_data(size=30, chars=string.ascii_letters + string.digits):
    return ''.join(random.choice(chars) for _ in range(size))
 
-def advertise_availability(registry_address, available_sensors, lat, lng):
-   payload = {'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
+registry_address = "" 
+available_sensors = ""
+lat = ""
+lng = ""
+broker_id = generate_random_data() # 30 characters, letters + digists. Probably enough for a random ID
+
+def advertise_availability():
+   payload = {'broker_id' : broker_id, 'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
    req = requests.get(registry_address+"/register_producer", params=payload)
    response_json = req.text
    response = json.loads(response_json)
@@ -61,6 +67,12 @@ class MyPubSubClientProtocol(WampClientProtocol):
          self.subscribe(sensor, onMyEvent1)
          start_publishing_sensor(sensor, 1, lat, lng)
       
+      def heartbeat():
+         print "Heartbeat"
+         advertise_availability()
+         reactor.callLater(180, heartbeat)
+
+      heartbeat()
       #start_publishing_sensor("http://example.com/myEvent1", 0.1, lat, lng)
 
 
@@ -88,8 +100,12 @@ if __name__ == '__main__':
    lat = args.lat
    lng = args.lng
 
+   registry_address = args.registry
+   available_sensors = args.sensors, 
+   lat = args.lat
+   lng = args.lng
 
-   wsuri = advertise_availability(args.registry, args.sensors, args.lat, args.lng)
+   wsuri = advertise_availability()
    print "Connecting to", wsuri
 
    ## our WAMP/WebSocket client
