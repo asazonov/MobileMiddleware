@@ -23,10 +23,10 @@ registry_address = ""
 available_sensors = ""
 lat = ""
 lng = ""
-broker_id = generate_random_data() # 30 characters, letters + digists. Probably enough for a random ID
+producer_id = generate_random_data() # 30 characters, letters + digists. Probably enough for a random ID
 
 def advertise_availability():
-   payload = {'broker_id' : broker_id, 'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
+   payload = {'producer_id' : producer_id, 'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
    req = requests.get(registry_address+"/register_producer", params=payload)
    response_json = req.text
    response = json.loads(response_json)
@@ -70,7 +70,7 @@ class MyPubSubClientProtocol(WampClientProtocol):
       def heartbeat():
          print "Heartbeat"
          advertise_availability()
-         reactor.callLater(180, heartbeat)
+         reactor.callLater(3, heartbeat)
 
       heartbeat()
       #start_publishing_sensor("http://example.com/myEvent1", 0.1, lat, lng)
