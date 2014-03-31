@@ -35,8 +35,8 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
 
       for channel in channels:
          print channel
-         self.subscribe(channel, save_to_file)
-         # self.subscribe(channel, default_response)
+         # self.subscribe(channel, save_to_file)
+         self.subscribe(channel, default_response)
 
       #self.subscribe("location", default_response)
       #self.subscribe("http://example.com/myEvent1", default_response) # hardwired for testing
@@ -92,6 +92,7 @@ if __name__ == '__main__':
    ## ACTUAL VERSION - loops through brokers in broker list, connecting to each
    broker_list = request_brokers(registry_address, parameters, max_brokers)
    for broker in broker_list:
+      # print "## BROKER ADDRESS = " + broker['broker_address'] + " ##"
       wsuri = broker['broker_address']
       print "Connecting to", wsuri
       factory = WampClientFactory(wsuri, debugWamp = False)

@@ -13,7 +13,7 @@ producer_list = []
 
 class Producer(object):
     """docstring for Sensor"""
-    def __init__(self, sensors, location, lat, lng, access_time, broker_address):
+    def __init__(self, sensors, lat, lng, access_time, broker_address):
         super(Producer, self).__init__()
         self.sensors = sensors
         #self.location = location
@@ -56,7 +56,8 @@ def register_producer():
     access_time = datetime.datetime.now()
     broker_address = "ws://localhost:" + str(open_port)
 
-    producer = Producer(sensors, location, lat, lng, access_time, broker_address)
+    producer = Producer(sensors, lat, lng, access_time, broker_address)
+    # producer = Producer(sensors, location, lat, lng, access_time, broker_address)
     producer_list.append(producer)
 
     response = {"broker_address" : broker_address, "http_port" : open_port2}
@@ -82,7 +83,6 @@ def request_brokers():
     broker_param = request.args.get('broker_param', type=str)
     max_brokers = request.args.get('max_brokers', type=int)
 
-    print "max_brokers:", max_brokers
     geocoder = geocoders.GoogleV3()
     place, (lat, lng) = geocoder.geocode(broker_param) 
     relevant_producers = get_relevant_producers(["location"], lat, lng, max_brokers)
@@ -90,7 +90,7 @@ def request_brokers():
     response = []
     if (relevant_producers):
         for producer in relevant_producers:
-            response.append({"broker_address" : producer.broker_address, "location" : producer.location, "lat" : producer.lat, "lng" : producer.lng})
+            response.append({"broker_address" : producer.broker_address, "lat" : producer.lat, "lng" : producer.lng})
 
     response_json = json.dumps(response)
     print "I AM RETURNING: " + str(response_json)
@@ -98,9 +98,15 @@ def request_brokers():
 
 def get_relevant_producers(sensors, lat, lng, max):
     relevant_producers = []
+    current = 0
+
     for producer in producer_list:
-        if set(sensors).issubset(set(producer.sensors)):
-            relevant_producers.append(producer)
+        if (current < max):
+            if set(sensors).issubset(set(producer.sensors)):
+                relevant_producers.append(producer)
+                current += 1
+        else:
+            break
 
     return relevant_producers
 
