@@ -75,11 +75,11 @@ def register_producer():
 
 @app.route("/request_broker", methods=['GET'])
 def request_broker():
-    broker_param = request.args.get('broker_param', type=str)
-    print "broker_param", broker_param
+    location = request.args.get('location', type=str)
+    print "location", location
     #request_parameters = request.args
     geocoder = geocoders.GoogleV3()
-    place, (lat, lng) = geocoder.geocode(broker_param) 
+    place, (lat, lng) = geocoder.geocode(location) 
     producer = get_best_producer(["camera", "microphone", "location"], lat, lng)
 
     response = {"broker_address" : producer.broker_address, "lat" : producer.lat, "lng" : producer.lng}
@@ -88,12 +88,13 @@ def request_broker():
 
 @app.route("/request_brokers", methods=['GET'])
 def request_brokers():
-    broker_param = request.args.get('broker_param', type=str)
+    location = request.args.get('location', type=str)
     max_brokers = request.args.get('max_brokers', type=int)
+    radius = request.args.get('radius', type=int)
 
     geocoder = geocoders.GoogleV3()
-    place, (lat, lng) = geocoder.geocode(broker_param) 
-    relevant_producers = get_relevant_producers(["location"], lat, lng, max_brokers)
+    place, (lat, lng) = geocoder.geocode(location) 
+    relevant_producers = get_relevant_producers(["location"], lat, lng, radius, max_brokers)
 
     response = []
     if (relevant_producers):
@@ -104,15 +105,18 @@ def request_brokers():
     print "I AM RETURNING: " + str(response_json)
     return response_json
 
-def get_relevant_producers(sensors, lat, lng, max):
+def get_relevant_producers(sensors, lat, lng, radius, max):
     relevant_producers = []
     current = 0
+    centre = Point(lat, lng)
 
     now = datetime.datetime.now()
 
     for producer in producers:
         if (current < max):
-            if set(sensors).issubset(set(producer.sensors)):
+            prod_location = Point(producer.lat, producer.lng)
+            distance = distance.distance(centre, prod_location).miles
+            if set(sensors).issubset(set(producer.sensors)) and distance <= radius:
                 relevant_producers.append(producer)
                 current += 1
         else:
@@ -148,5 +152,5 @@ if __name__ == "__main__":
     #producers.append(a)
     #producers.append(b)
 
-    app.debug = True
+    app.debug = False
     app.run(host='127.0.0.1')

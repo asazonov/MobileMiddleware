@@ -41,17 +41,19 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
       #self.subscribe("location", default_response)
       #self.subscribe("http://example.com/myEvent1", default_response) # hardwired for testing
 
-def request_broker_address(registry_address,request_parameters):
-   payload = {'broker_param': request_parameters}
+def request_broker_address(registry_address,location):
+   payload = {'location': location}
    req = requests.get(registry_address+"/request_broker", params=payload)
    response_json = req.text
    response = json.loads(response_json)
    return response["broker_address"]
 
-def request_brokers(registry_address, request_parameters, max_brokers):
-   payload = {'broker_param': request_parameters, 'max_brokers' : max_brokers}
+def request_brokers(registry_address, location, radius, max_brokers):
+   payload = {'location': location, 'max_brokers' : max_brokers, 'radius' : radius}
    req = requests.get(registry_address + "/request_brokers", params=payload)
    response_json = req.text
+   print "THIS IS IT HERE!!!!!!: " + req.text
+   
    response = json.loads(response_json)
    # TODO: parse JSON response
       # if nothing valid, wait a while and then request again
@@ -68,15 +70,17 @@ if __name__ == '__main__':
    parser = argparse.ArgumentParser()
    parser.add_argument('-r', '--registry', type=str)
    parser.add_argument('-c', '--channels') #, nargs='+', type=str)
-   parser.add_argument('-p', '--parameters', type=str)
-   parser.add_argument('-b', '--maxbrokers', type=str)
+   parser.add_argument('-l', '--location', type=str)
+   parser.add_argument('-b', '--maxbrokers', type=int)
+   parser.add_argument('-x', '--radius', type=int)
 
    args = parser.parse_args()
 
    channels = args.channels.split(",")
-   parameters = args.parameters
+   location = args.location
    registry_address = args.registry
    max_brokers = args.maxbrokers
+   radius = args.radius
 
    ## our WAMP/WebSocket client
    ##
@@ -90,7 +94,7 @@ if __name__ == '__main__':
    #    connectWS(factory) 
    
    ## ACTUAL VERSION - loops through brokers in broker list, connecting to each
-   broker_list = request_brokers(registry_address, parameters, max_brokers)
+   broker_list = request_brokers(registry_address, location, radius, max_brokers)
    
    if (broker_list):
 

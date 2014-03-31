@@ -24,7 +24,10 @@ As described in the brief, the sensor data producer is deployed on a mobile devi
 The technologies used to develop the producer had to be easy to deploy on a mobile device. In recent years, it has become increasingly popular to develop mobile web apps – applications that use device's browser as the execution environment. Such applications have an advantage of being easy to distribute and deploy on various platforms. HTML5 and Javascript, used to develop web apps, provide rich APIs for accessing sensor data – accelerometers, audio, video, etc. Thus, the project aimed to utilise technologies that are supported by browsers of modern mobile platforms. 
 
 ### WebSockets and WAMP
+
+
 ### REST
+The system operates through a REST API, the registry offering various methods to clients (e.g. '/register_producer', '/request_brokers') which are called vias GET requests.
 
 ## Components
 ### Registry
