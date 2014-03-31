@@ -27,16 +27,16 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
       def default_response(topic, event):
          print "Received event", topic, event
 
-      io_file = open("output/" + str(os.getpid()) + ".csv", 'w+')
-      io_file.write("sensor,lat,lng,data,timestamp,time\n")
+      # io_file = open("output/" + str(os.getpid()) + ".csv", 'w+')
+      # io_file.write("sensor,lat,lng,data,timestamp,time\n")
       
       def save_to_file(topic, event):
          io_file.write(str(str(event['sensor']) + "," + event['lat']) + "," + str(event['lng']) + "," + str(event['data']) + "," + str(event['timestamp']) + "," + str((datetime.datetime.now() - datetime.datetime.strptime(event['timestamp'], "%Y-%m-%d %H:%M:%S.%f")).total_seconds()) + "\n")
 
       for channel in channels:
          print channel
-         # self.subscribe(channel, save_to_file)
-         self.subscribe(channel, default_response)
+         self.subscribe(channel, save_to_file)
+         # self.subscribe(channel, default_response)
 
       #self.subscribe("location", default_response)
       #self.subscribe("http://example.com/myEvent1", default_response) # hardwired for testing
@@ -91,12 +91,17 @@ if __name__ == '__main__':
    
    ## ACTUAL VERSION - loops through brokers in broker list, connecting to each
    broker_list = request_brokers(registry_address, parameters, max_brokers)
-   for broker in broker_list:
-      # print "## BROKER ADDRESS = " + broker['broker_address'] + " ##"
-      wsuri = broker['broker_address']
-      print "Connecting to", wsuri
-      factory = WampClientFactory(wsuri, debugWamp = False)
-      factory.protocol = SensorDataConsumerClientProtocol
-      connectWS(factory)
    
-   reactor.run()
+   if (broker_list):
+
+      io_file = open("output/" + str(os.getpid()) + ".csv", 'w+')
+      io_file.write("sensor,lat,lng,data,timestamp,time\n")
+      for broker in broker_list:
+         # print "## BROKER ADDRESS = " + broker['broker_address'] + " ##"
+         wsuri = broker['broker_address']
+         print "Connecting to", wsuri
+         factory = WampClientFactory(wsuri, debugWamp = False)
+         factory.protocol = SensorDataConsumerClientProtocol
+         connectWS(factory)
+      
+      reactor.run()
