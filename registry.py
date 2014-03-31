@@ -8,6 +8,7 @@ import datetime
 import time
 from helper import pick_unused_port, spawn_daemon
 import subprocess
+import constants
 
 producers = {}
 
@@ -114,7 +115,7 @@ def get_relevant_producers(sensors, lat, lng, max):
 
     for producer in producers.values():
 
-        if ((now - producer.access_time).total_seconds() > 5):
+        if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
             producers.pop(producer.producer_id)
             continue
 
@@ -155,5 +156,5 @@ if __name__ == "__main__":
     #producers.append(a)
     #producers.append(b)
 
-    app.debug = True
+    app.debug = False
     app.run(host='127.0.0.1')
