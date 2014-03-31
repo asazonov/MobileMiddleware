@@ -107,7 +107,7 @@ if __name__ == '__main__':
    lng = args.lng
 
 
-   wsuri = advertise_availability(args.registry, args.sensors, 55.755826 + random.random() * 3, 37.6173 + random.random() * 3)
+   wsuri = advertise_availability(args.registry, args.sensors, args.lat, args.lng)
    print "Connecting to", wsuri
 
    ## our WAMP/WebSocket client
