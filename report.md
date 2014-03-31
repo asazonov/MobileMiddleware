@@ -3,6 +3,8 @@ Service-oriented middleware for mobile sensing
 
 # Goals
 
+Modern mobile devices are equipped with various complex sensors -- accelerometers, location, video, audio, temperature, altitude, etc. Not all of them provide scientific-grade precision or update frequency. However these disadvantage are often compensated by ubiquity and availability of such devices, allowing unprecedented deployment scale for scientific experiments.
+
 It was decided that a producer must send the data only to one source. Implementing data broadcasting through the producer would not be acceptable, since mobile devices are often limited in bandwidth. 
 
 # Design
