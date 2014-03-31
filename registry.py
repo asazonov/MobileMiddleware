@@ -73,18 +73,18 @@ def register_producer():
     return response_json
 
 
-@app.route("/request_broker", methods=['GET'])
-def request_broker():
-    broker_param = request.args.get('broker_param', type=str)
-    print "broker_param", broker_param
-    #request_parameters = request.args
-    geocoder = geocoders.GoogleV3()
-    place, (lat, lng) = geocoder.geocode(broker_param) 
-    producer = get_best_producer(["camera", "microphone", "location"], lat, lng)
+# @app.route("/request_broker", methods=['GET'])
+# def request_broker():
+#     broker_param = request.args.get('broker_param', type=str)
+#     print "broker_param", broker_param
+#     #request_parameters = request.args
+#     geocoder = geocoders.GoogleV3()
+#     place, (lat, lng) = geocoder.geocode(broker_param) 
+#     producer = get_best_producer(["camera", "microphone", "location"], lat, lng)
 
-    response = {"broker_address" : producer.broker_address, "lat" : producer.lat, "lng" : producer.lng}
-    response_json = json.dumps(response)
-    return response_json
+#     response = {"broker_address" : producer.broker_address, "lat" : producer.lat, "lng" : producer.lng}
+#     response_json = json.dumps(response)
+#     return response_json
 
 @app.route("/request_brokers", methods=['GET'])
 def request_brokers():
@@ -110,7 +110,14 @@ def get_relevant_producers(sensors, lat, lng, max):
 
     now = datetime.datetime.now()
 
-    for producer in producers:
+
+
+    for producer in producers.values():
+
+        if ((now - producer.access_time).total_seconds() > 5):
+            producers.pop(producer.producer_id)
+            continue
+
         if (current < max):
             if set(sensors).issubset(set(producer.sensors)):
                 relevant_producers.append(producer)
