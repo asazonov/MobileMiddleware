@@ -16,7 +16,7 @@ class Producer(object):
     def __init__(self, sensors, location, lat, lng, access_time, broker_address):
         super(Producer, self).__init__()
         self.sensors = sensors
-        self.location = location
+        #self.location = location
         self.lat = lat
         self.lng = lng
         self.access_time = access_time
@@ -24,7 +24,7 @@ class Producer(object):
         #self.http_port = http
 
     def __str__(self):
-        return str([self.sensors, self.location, self.lat, self.lng, self.access_time, self.broker_address])
+        return str([self.sensors, self.lat, self.lng, self.access_time, self.broker_address])
 
 
 @app.route("/list_brokers", methods=['GET'])
@@ -44,7 +44,7 @@ def register_producer():
     geocoder = geocoders.GoogleV3()
 
     # Unicode in Python 2 :-(
-    location = unicode(geocoder.reverse(Point(lat, lng))[0]).encode('utf-8') 
+    #location = unicode(geocoder.reverse(Point(lat, lng))[0]).encode('utf-8') 
     open_port = pick_unused_port()
     open_port2 = pick_unused_port()
     #spawn_demon("/usr/bin/say", "/Users/alehins/Documents/StAndrews/CT/MobileMiddleware/server.py -p " + str(open_port))
@@ -73,7 +73,7 @@ def request_broker():
     place, (lat, lng) = geocoder.geocode(broker_param) 
     producer = get_best_producer(["camera", "microphone", "location"], lat, lng)
 
-    response = {"broker_address" : producer.broker_address, "location" : producer.location, "lat" : producer.lat, "lng" : producer.lng}
+    response = {"broker_address" : producer.broker_address, "lat" : producer.lat, "lng" : producer.lng}
     response_json = json.dumps(response)
     return response_json
 
