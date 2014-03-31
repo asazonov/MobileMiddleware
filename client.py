@@ -10,6 +10,8 @@ from autobahn.wamp1.protocol import WampClientFactory, \
 import argparse
 import requests
 import json
+import os
+import datetime
 
 class SensorDataConsumerClientProtocol(WampClientProtocol):
    """
@@ -23,9 +25,14 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
       def default_response(topic, event):
          print "Received event", topic, event
 
+      io_file = open("output/" + str(os.getpid()) + ".csv", 'w+')
+      
+      def save_to_file(topic, event):
+         io_file.write(str(str(event['sensor']) + "," + event['lat']) + "," + str(event['lng']) + "," + str(event['data']) + "," + str(event['timestamp']) + "," + str(datetime.datetime.now() - datetime.datetime.strptime(event['timestamp'], "%Y-%m-%d %H:%M:%S.%f")) + "\n")
+
       for channel in channels:
          print channel
-         self.subscribe(channel, default_response)
+         self.subscribe(channel, save_to_file)
 
       #self.subscribe("location", default_response)
       #self.subscribe("http://example.com/myEvent1", default_response) # hardwired for testing

@@ -8,9 +8,9 @@ def test_broker_scalability(upper_bound):
     p2 = subprocess.Popen(['python', 'producer.py', '-r', 'http://127.0.0.1:5000', '-s', 'camera,microphone,location', '--lat', '51.755826', '--lng', '37.6173']) 
     time.sleep(5) # Give time for the producer to register
 
-    for x in range(0, upper_bound):
+    for x in range(upper_bound):
     	subprocess.Popen(['python', 'client.py', '-r', 'http://127.0.0.1:5000', '-p' 'Warsaw', '-c' 'camera,microphone,location'])
-    	time.sleep(2)
+    	#time.sleep(2)
     exit_codes = [p.wait() for p in p1, p2]
 
 
