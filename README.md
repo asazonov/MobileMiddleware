@@ -56,10 +56,11 @@ Run registry:
 python registry.py
 ```
 
-Run client:
+Run consumer:
 
 ```
-python client.py -r http://127.0.0.1:5000 -p Warsaw -c location, sound # address of the registry, location of interest, sensors (channels) -- currently ignored  
+python consumer.py -r http://127.0.0.1:5000 -l Moscow -d 100 -c location, sound # address of the registry, location of interest, sensors (channels) -- currently ignored  
+python consumer.py -r http://127.0.0.1:5000 -x 55.75 -y 37.61 -d 100 -c location, sound # address of the registry, location of interest, sensors (channels) -- currently ignored  
 ```
 
 There should be no need to run the server individually (the registry should handle this).
@@ -73,7 +74,7 @@ Haven't touched the provider code yet. The broker will probably require more wor
 A basic producer was implemented. 
 
 ```
-python producer.py -r http://127.0.0.1:5000 -s camera,microphone,location --lat 51.755826", --lng 37.6173 
+python producer.py -r http://127.0.0.1:5000 -s camera,microphone,location --lat 55.7500 --lng 37.6167
 ```
 
 The producer advertises its availability to the registry. The registry spawns a broker and returns the broker's address to the producer. Producer connects to the broker and begins publishing. At the moment, it sends dummy messages every two seconds. 
@@ -96,3 +97,24 @@ TODO
 * Report is important. Diagrams, justifications, etc. 
 
 
+#######################################################################################################################################
+#########                                               COMMAND LINE EXAMPLES                                               ###########
+#######################################################################################################################################
+####  python registry.py                                                                                                           ####
+#######                                                                                                                         #######
+####  PRODUCER IN MOSCOW (55.75", 37.6167")                                                                                        ####
+####     python producer.py -r http://127.0.0.1:5000 -s camera,microphone,location --lat 55.7500 --lng 37.6167                     ####
+#######                                                                                                                         #######
+####  PRODUCER IN BELFAST (54.597", -5.93")                                                                                        ####
+####     python producer.py -r http://127.0.0.1:5000 -s camera,microphone,location --lat 54.597 --lng -5.93                        ####
+#######                                                                                                                         #######
+####  CONSUMER LOOKING WITHIN 100 MILES OF MOSCOW (55.75", 37.6167")                                                               ####
+####     python consumer.py -r http://127.0.0.1:5000 -l Moscow -d 100 -c location, sound                                           ####
+####     python consumer.py -r http://127.0.0.1:5000 -x 55.75 -y 37.61 -d 100 -c location, sound                                   ####
+#######                                                                                                                         #######
+####  CONSUMER LOOKING WITHIN 10 MILES OF BELFAST (54.597", -5.93")                                                                ####
+####     python consumer.py -r http://127.0.0.1:5000 -l Belfast -d 100 -c location, sound                                          ####
+####     python consumer.py -r http://127.0.0.1:5000 -x 54.597 -y 5.93 -d 100 -c location, sound                                   ####
+#######                                                                                                                         #######
+#######################################################################################################################################
+#######################################################################################################################################
