@@ -36,7 +36,7 @@ def spawn_daemon(cmd):
         sys.exit(1)
 
     # do stuff
-    subprocess.Popen(cmd)
+    subprocess.Popen(cmd)#, close_fds = True)
 
     # all done
     os._exit(os.EX_OK)

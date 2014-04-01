@@ -28,16 +28,18 @@ producer_id = generate_random_data() # 30 characters, letters + digists. Probabl
 
 def advertise_availability():
    payload = {'producer_id' : producer_id, 'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
-   req = requests.get(registry_address+"/register_producer", params=payload)
-   response_json = req.text
-   response = json.loads(response_json)
-   time.sleep(2) # a dirty hack. We need to give time for the broker to initialise
-   return response["broker_address"]
+   try:
+      req = requests.get(registry_address+"/register_producer", params=payload)
+      response_json = req.text
+      response = json.loads(response_json)
+      time.sleep(2) # a dirty hack. We need to give time for the broker to initialise
+      return response["broker_address"]
+   except:
+      print "Heartbeat skipped"
 
-
-class MyPubSubClientProtocol(WampClientProtocol):
+class ProducerPubSubProtocol(WampClientProtocol):
    """
-   Protocol class for our simple demo WAMP client.
+   Protocol class for the producer
    """
 
    def onSessionOpen(self):
@@ -112,7 +114,7 @@ if __name__ == '__main__':
    ## our WAMP/WebSocket client
    ##
    factory = WampClientFactory(wsuri, debugWamp = False)
-   factory.protocol = MyPubSubClientProtocol
+   factory.protocol = ProducerPubSubProtocol
    connectWS(factory)
 
    ## run the Twisted network reactor

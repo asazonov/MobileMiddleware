@@ -9,6 +9,7 @@ import time
 from helper import pick_unused_port, spawn_daemon
 import subprocess
 import constants
+import os
 
 producers = {}
 
@@ -58,10 +59,12 @@ def register_producer():
         open_port2 = pick_unused_port()
         #spawn_demon("/usr/bin/say", "/Users/alehins/Documents/StAndrews/CT/MobileMiddleware/server.py -p " + str(open_port))
         #spawn_demon("say hi")
-        cmd = ['python', "server.py", "-p" + str(open_port), "-t" + str(open_port2)]
+        cmd = ['nohup','python', "server.py", "-p" + str(open_port), "-t" + str(open_port2)]
         # cmd = ['python', "D:\Andrew\Documents\GitHub\MobileMiddleware\server.py", "-p" + str(open_port), "-t" + str(open_port2)]
-        subprocess.Popen(cmd)
+        #subprocess.Popen(cmd)
         #spawn_daemon(cmd)
+        #spawn_daemon(cmd)
+        subprocess.Popen(cmd, stdout=open('/dev/null', 'w'), stderr=open('logfile.log', 'a'), preexec_fn=os.setpgrp, close_fds = True)
         access_time = datetime.datetime.now()
         broker_address = "ws://localhost:" + str(open_port)
 
@@ -117,6 +120,7 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
     for producer in producers.values():
 
         if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
+            print "Removing producer " + producer.producer_id
             producers.pop(producer.producer_id)
             continue
 
@@ -159,5 +163,5 @@ if __name__ == "__main__":
     #producers.append(a)
     #producers.append(b)
 
-    app.debug = False
+    app.debug = True
     app.run(host='127.0.0.1')
