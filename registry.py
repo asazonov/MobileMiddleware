@@ -157,10 +157,5 @@ def get_best_producer(sensors, lat, lng):
 
 
 if __name__ == "__main__":
-    #a = Producer(["camera", "microphone", "location"], "Moscow", 55.755826, 37.6173, datetime.datetime.now(), "ws://localhost:9000")
-    #b = Producer(["camera", "microphone", "location"], "San Paolo", -23.5505199, -46.63330939999999, datetime.datetime.now(), "ws://localhost:9000")
-    #producers.append(a)
-    #producers.append(b)
-
-    app.debug = True
+    app.debug = False
     app.run(host='127.0.0.1')

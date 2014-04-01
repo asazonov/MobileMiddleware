@@ -30,7 +30,7 @@ def advertise_availability():
    payload = {'producer_id' : producer_id, 'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
    req = requests.get(registry_address+"/register_producer", params=payload)
 
-   print "###PAYLOAD### " + str(payload) + " ###########"
+   # print "###PAYLOAD### " + str(payload) + " ###########"
 
    response_json = req.text
    response = json.loads(response_json)

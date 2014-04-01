@@ -99,8 +99,9 @@ if __name__ == '__main__':
          print "ERROR - must have either location (-l) or latitude (-x) and longitude (-y)"
          exit()
       broker_list = request_brokers_xy(registry_address, lat, lng, radius, max_brokers)
-   
+
    if (broker_list):
+      print "### BROKERS : " + str(len(broker_list))
       io_file = open("output/" + str(os.getpid()) + ".csv", 'w+')
       io_file.write("sensor,lat,lng,data,timestamp,time\n")
       for broker in broker_list:
