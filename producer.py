@@ -42,7 +42,7 @@ def advertise_availability():
       print "Heartbeat skipped"
       heartbeats_skipped += 1
       if heartbeats_skipped > MAX_HEARTBEATS_SKIPPED:
-         pix heartbeats_skipped + " heartbeats skipped. Exiting..."
+         print heartbeats_skipped + " heartbeats skipped. Exiting..."
          sys.exit()
 
 
