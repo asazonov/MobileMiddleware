@@ -10,6 +10,7 @@ from helper import pick_unused_port, spawn_daemon
 import subprocess
 import constants
 import os
+import pickle
 
 producers = {}
 
@@ -45,7 +46,7 @@ def register_producer():
 
     if producer_id in producers:
         producers[producer_id].access_time = datetime.datetime.now()
-
+        pickle.dump(producers, open( "producers.p", "wb" ))
     else:
         sensors = request.args.get('sensors', type=str).split(",")
         lat = request.args.get('lat', type=str)
@@ -71,6 +72,8 @@ def register_producer():
         producer = Producer(producer_id, sensors, lat, lng, access_time, broker_address)
         # producer = Producer(sensors, location, lat, lng, access_time, broker_address)
         producers[producer_id] = producer
+        pickle.dump(producers, open( "producers.p", "wb" ))
+
 
     response = {"broker_address" : producers[producer_id].broker_address} #, "http_port" : open_port2}
     response_json = json.dumps(response)
@@ -125,6 +128,7 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
         if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
             print "Removing producer " + producer.producer_id
             producers.pop(producer.producer_id)
+            pickle.dump(producers, open( "producers.p", "wb" ))
             continue
 
         if (current < max):
@@ -161,6 +165,9 @@ def get_best_producer(sensors, lat, lng):
 
 
 if __name__ == "__main__":
-
+    try:
+        producers = pickle.load( open( "producers.p", "rb" ) )
+    except:
+        print "No pickle yet!"
     app.debug = True
     app.run(host='127.0.0.1')

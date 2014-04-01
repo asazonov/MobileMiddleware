@@ -25,9 +25,14 @@ The technologies used to develop the producer had to be easy to deploy on a mobi
 
 ### WebSockets and WAMP
 
+WebSockets is a protocol for full-duplex (two-way) communication through TCP. Additionally, compared to regular HTTP requests, WebSockets have a low header overhead (2 bytes compared to kilobytes in HTTP). Two-way communication and low overhead (thus, decreased latency and bandwidth usage) are advantageous for a data streaming platform. 
+
+WebSockets are supported by most of the modern desktop and mobile browsers (through Javascript APIs, without utilising any plugins), which makes it easy to use WebScokets-based communication in web-apps. Various libraries implement the WebSockets for other languages -- Python, Java, Go, etc. 
 
 ### REST
-The system operates through a REST API, the registry offering various methods to clients (e.g. '/register_producer', '/request_brokers') which are called vias GET requests.
+
+The system operates through a REST API, the registry offering various methods to clients (e.g. '/register_producer', '/request_brokers') which are called via GET requests.
+
 
 ## Components
 ### Registry
