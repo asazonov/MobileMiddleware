@@ -97,6 +97,7 @@ def request_brokers():
     location = request.args.get('location', type=str)
     max_brokers = request.args.get('max_brokers', type=int)
     radius = request.args.get('radius', type=int)
+    sensors = request.args.get('sensors', type=str).split(",")
 
     if (location != None):
         geocoder = geocoders.GoogleV3()
@@ -105,7 +106,7 @@ def request_brokers():
         lat = request.args.get('lat', type=str)
         lng = request.args.get('lng', type=str)
 
-    relevant_producers = get_relevant_producers(["location"], lat, lng, radius, max_brokers)
+    relevant_producers = get_relevant_producers(sensors, lat, lng, radius, max_brokers)
 
     response = []
     if (relevant_producers):
@@ -113,7 +114,6 @@ def request_brokers():
             response.append({"broker_address" : producer.broker_address, "lat" : producer.lat, "lng" : producer.lng})
 
     response_json = json.dumps(response)
-    print "I AM RETURNING: " + str(response_json)
     return response_json
 
 def get_relevant_producers(sensors, lat, lng, radius, max):
