@@ -1,5 +1,4 @@
-Service-oriented middleware for mobile sensing
-=================
+% Service-oriented middleware for mobile sensing
 
 # Goals
 
