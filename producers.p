@@ -1,5 +1,5 @@
 (dp0
-S'uhxINT0T5gN6q7jo7oVH57nlvuFFsL'
+S'EsQlwIK0SbPln39y3uMvzK7ABb2Pgx'
 p1
 ccopy_reg
 _reconstructor
@@ -18,7 +18,7 @@ p8
 cdatetime
 datetime
 p9
-(S'\x07\xde\x04\x01\x11\x01\x02\x05\x0f&'
+(S'\x07\xde\x04\x01\x11\x11#\x0ed\xab'
 p10
 tp11
 Rp12
@@ -27,7 +27,7 @@ p13
 g1
 sS'broker_address'
 p14
-S'ws://localhost:45328'
+S'ws://localhost:47503'
 p15
 sS'lat'
 p16
