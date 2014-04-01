@@ -8,15 +8,7 @@ It was decided that a producer must send the data only to one source. Implementi
 
 # Design
 
-## Components
-### Registry
-### Broker
-### Producer
-### Consumer
-
-# Implementation
-
-## Key technologies
+## Key protocols
 
 As described in the brief, the sensor data producer is deployed on a mobile device. This dictated a number of constraints that had to be considered while developing the system.
 
@@ -30,7 +22,24 @@ WebSockets are supported by most of the modern desktop and mobile browsers (thro
 
 ### REST
 
-The system operates through a REST API, the registry offering various methods to clients (e.g. '/register_producer', '/request_brokers') which are called via GET requests.
+Representational state transfer (REST) is a set of principles that uses Web standards (such as HTTP and URL) to structure application-to-application communication. The system operates through a REST API, the registry offering various methods to clients (e.g. '/register_producer', '/request_brokers') which are called via GET requests.
+
+
+## Components
+### Registry
+
+
+### Broker
+
+
+
+### Producer
+
+### Consumer
+
+
+# Implementation
+
 
 
 ## Components
