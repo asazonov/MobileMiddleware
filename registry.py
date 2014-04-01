@@ -60,12 +60,11 @@ def register_producer():
         open_port2 = pick_unused_port()
         #spawn_demon("/usr/bin/say", "/Users/alehins/Documents/StAndrews/CT/MobileMiddleware/server.py -p " + str(open_port))
         #spawn_demon("say hi")
-        cmd = ['nohup','python', "server.py", "-p" + str(open_port), "-t" + str(open_port2)]
         # cmd = ['python', "D:\Andrew\Documents\GitHub\MobileMiddleware\server.py", "-p" + str(open_port), "-t" + str(open_port2)]
         #subprocess.Popen(cmd)
         #spawn_daemon(cmd)
         #spawn_daemon(cmd)
-        subprocess.Popen(cmd, stdout=open('/dev/null', 'w'), stderr=open('logfile.log', 'a'), preexec_fn=os.setpgrp, close_fds = True)
+        subprocess.Popen(BROKER_COMMAND, stdout=open('/dev/null', 'w'), stderr=open('logfile.log', 'a'), preexec_fn=os.setpgrp, close_fds = True)
         access_time = datetime.datetime.now()
         broker_address = "ws://localhost:" + str(open_port)
 
