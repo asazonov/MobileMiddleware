@@ -64,6 +64,7 @@ def register_producer():
         #subprocess.Popen(cmd)
         #spawn_daemon(cmd)
         #spawn_daemon(cmd)
+        BROKER_COMMAND = ['nohup','python', "broker.py", "-p" + str(open_port), "-t" + str(open_port2), "-s", str(sensors)]
         subprocess.Popen(BROKER_COMMAND, stdout=open('/dev/null', 'w'), stderr=open('logfile.log', 'a'), preexec_fn=os.setpgrp, close_fds = True)
         access_time = datetime.datetime.now()
         broker_address = "ws://localhost:" + str(open_port)

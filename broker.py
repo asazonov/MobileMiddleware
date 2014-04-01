@@ -29,6 +29,9 @@ from autobahn.wamp1.protocol import WampServerFactory, \
                                     WampServerProtocol
 
 import argparse
+import ast
+
+sensors = ""
 
 
 class MyPubSubServerProtocol(WampServerProtocol):
@@ -37,30 +40,30 @@ class MyPubSubServerProtocol(WampServerProtocol):
    """
 
    def onSessionOpen(self):
-
       ## When the WAMP session to a client has been established,
       ## register a single fixed URI as PubSub topic that our
       ## message broker will handle
       ##
-      self.registerForPubSub("camera")
-      self.registerForPubSub("location")
-      self.registerForPubSub("speed")
+      for sensor in sensors:
+         self.registerForPubSub(sensor)
       #self.registerForPubSub("http://example.com/myEvent1")
-
-
+      #self.registerForPubSub("camera")
+      #self.registerForPubSub("location")
+      #self.registerForPubSub("speed")
 
 if __name__ == '__main__':
-
    log.startLogging(sys.stdout)
 
    parser = argparse.ArgumentParser()
    parser.add_argument('-p', '--port', type=str)
    parser.add_argument('-t', '--tcp', type=int)
+   parser.add_argument('-s', '--sensors', type=str)
 
    args = parser.parse_args()
-
+   print "sensorssensorssensors"  + sensors
    port = args.port
    tcp = args.tcp
+   sensors = ast.literal_eval(args.sensors)
 
    wampFactory = WampServerFactory("ws://localhost:" + str(port), debugWamp = False)
    wampFactory.protocol = MyPubSubServerProtocol
