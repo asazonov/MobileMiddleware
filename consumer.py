@@ -32,7 +32,7 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
       
       def save_to_file(topic, event):
          io_file.write(str(str(event['sensor']) + "," + event['lat']) + "," + str(event['lng']) + "," + str(event['data']) + "," + str(event['timestamp']) + "," + str((datetime.datetime.now() - datetime.datetime.strptime(event['timestamp'], "%Y-%m-%d %H:%M:%S.%f")).total_seconds()) + "\n")
-
+         io_file.flush()
       for channel in channels:
          print channel
          self.subscribe(channel, save_to_file)

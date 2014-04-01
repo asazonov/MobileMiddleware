@@ -30,3 +30,10 @@
   import pkg_resources
 /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
   import pkg_resources
+nohup: ignoring input
+nohup: ignoring input
+nohup: ignoring input
+nohup: ignoring input
+nohup: ignoring input
+nohup: ignoring input
+nohup: ignoring input
