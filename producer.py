@@ -16,6 +16,7 @@ import datetime
 import random
 import string
 import constants
+import sys
 
 def generate_random_data(size=30, chars=string.ascii_letters + string.digits):
    return ''.join(random.choice(chars) for _ in range(size))
@@ -25,6 +26,7 @@ available_sensors = ""
 lat = ""
 lng = ""
 producer_id = generate_random_data() # 30 characters, letters + digists. Probably enough for a random ID
+heartbeats_skipped = 0
 
 def advertise_availability():
    payload = {'producer_id' : producer_id, 'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
@@ -33,9 +35,15 @@ def advertise_availability():
       response_json = req.text
       response = json.loads(response_json)
       time.sleep(2) # a dirty hack. We need to give time for the broker to initialise
+      heartbeats_skipped = 0
+      print "Heartbeat"
       return response["broker_address"]
    except:
       print "Heartbeat skipped"
+      heartbeats_skipped += 1
+      if heartbeats_skipped > MAX_HEARTBEATS_SKIPPED:
+         pix heartbeats_skipped + " heartbeats skipped. Exiting..."
+         sys.exit()
 
 
 class ProducerPubSubProtocol(WampClientProtocol):
@@ -72,7 +80,6 @@ class ProducerPubSubProtocol(WampClientProtocol):
          start_publishing_sensor(sensor, 1, lat, lng)
       
       def heartbeat():
-         print "Heartbeat"
          advertise_availability()
          reactor.callLater(constants.HEARTBEAT_RATE, heartbeat)
 
