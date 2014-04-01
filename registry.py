@@ -27,6 +27,7 @@ class Producer(object):
         self.broker_address = broker_address
         self.producer_id = producer_id
         self.broker_pid = broker_pid
+        # print "###BROKER PID : " + str(broker_pid) + " ###"
         #self.http_port = http
 
     def __str__(self):
@@ -67,14 +68,15 @@ def register_producer():
         #spawn_daemon(cmd)
         #spawn_daemon(cmd)
         BROKER_COMMAND = ['nohup','python', "broker.py", "-p" + str(open_port), "-t" + str(open_port2), "-s", str(sensors)]
-        broker_pid = subprocess.Popen(BROKER_COMMAND, stdout=open('/dev/null', 'w'), stderr=open('logfile.log', 'a'), preexec_fn=os.setpgrp, close_fds = True)
+        broker = subprocess.Popen(BROKER_COMMAND, stdout=open('/dev/null', 'w'), stderr=open('logfile.log', 'a'), preexec_fn=os.setpgrp, close_fds = True)
         access_time = datetime.datetime.now()
         broker_address = "ws://localhost:" + str(open_port)
 
-        producer = Producer(producer_id, sensors, lat, lng, access_time, broker_address, broker_pid)
+        producer = Producer(producer_id, sensors, lat, lng, access_time, broker_address, broker.pid)
         # producer = Producer(sensors, location, lat, lng, access_time, broker_address)
         producers[producer_id] = producer
         pickle.dump(producers, open( "producers.p", "wb" ))
+        print "###BROKER PID [register producer]: " + str(producer.broker_pid) + " ###"
 
 
     response = {"broker_address" : producers[producer_id].broker_address} #, "http_port" : open_port2}
@@ -126,10 +128,23 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
     now = datetime.datetime.now()
 
     for producer in producers.values():
+        print "$$$ PRODUCER : " + producer.producer_id
+        print " > BROKER : " + str(producer.broker_pid)
+        print "======================"
+
+    print ""
+    print ""
+    print ""
+
+    for producer in producers.values():
 
         if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
             print "Removing producer " + producer.producer_id
-            os.kill(producer.broker_pid, signal.SIGQUIT) # kill broker associated with the producer
+            # print "###BROKER PID [get_relevant]: " + str(producer.broker_pid.pid) + " ###"
+            # print "###BROKER PID [get_relevant]: " + str(int(producer.broker_pid)) + " ###"
+            print "Removing broker " + str(producer.broker_pid)
+
+            os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer
             producers.pop(producer.producer_id)
             pickle.dump(producers, open( "producers.p", "wb" ))
             continue
@@ -144,6 +159,15 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
             break
 
     return relevant_producers
+
+def remove_dead_producers():
+    for producers in producers.values():
+        if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
+            os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer
+            producers.pop(producer.producer_id)
+            pickle.dump(producers, open( "producers.p", "wb" ))
+            continue
+
 
 def get_best_producer(sensors, lat, lng):
     # list of producers that have the requested sensors
@@ -170,7 +194,9 @@ def get_best_producer(sensors, lat, lng):
 if __name__ == "__main__":
     try:
         producers = pickle.load( open( "producers.p", "rb" ) )
+        remove_dead_producers
     except:
         print "No pickle yet!"
     app.debug = True
     app.run(host='127.0.0.1')
+    #lol
