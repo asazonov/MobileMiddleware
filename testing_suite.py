@@ -2,7 +2,7 @@ import subprocess
 import time 
 import os
 import signal
-
+import argparse
 
 def test_broker_scalability(upper_bound):
     consumer_list = []
@@ -33,9 +33,42 @@ def test_broker_scalability(upper_bound):
 
 
 def main():
-	consumer_bounds = [10, 20, 50, 100, 150, 200, 250, 300]
-	for consumer_bound in consumer_bounds:
-		test_broker_scalability(consumer_bound)
+
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-s', '--scalability', action='store_true')
+    parser.add_argument('-t', '--tempinterrupt', action='store_true')
+    parser.add_argument('-d', '--removeproducers', action='store_true')
+    parser.add_argument('-b', '--replacebrokers', action='store_true')
+    parser.add_argument('-r', '--rebuildregistry', action='store_true')
+
+    args = parser.parse_args()
+
+    if (args.scalability):
+		consumer_bounds = [10, 20, 50, 100, 150, 200, 250, 300]
+		for consumer_bound in consumer_bounds:
+			test_broker_scalability(consumer_bound)
+
+    if (args.tempinterrupt):
+
+
+
+    if (args.removeproducers):
+   
+
+
+    if (args.replacebrokers):
+    
+
+
+    if (args.rebuildregistry):
+
+
+
+
+
+
 
 
 if  __name__ =='__main__':main()
