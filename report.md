@@ -34,9 +34,7 @@ It was decided that a producer must send the data only to one source. Multiple c
 ## Components
 ### Registry
 
-Registry is used to: register and keep track of data providers, as well as providing addresses of relevant brokers to the enquiring consumers. A REST API is used for communicating with the registry. The popular Flask web framework is used to serve HTTP requests.
 
-The registry maintains a list of brokers (and, thus, producers associated with them). For each producer-broker pair, we keep track of address of the broker, available sensors, current location, the time of last heartbeat and other information. At every change, the list is serialised and saved in a file (using Pickle). This allow to restore the state of the registry after it has crashed (on start, the contents of broker list are loaded from the serialised file).  
 
 ### Broker
 
@@ -52,6 +50,13 @@ The registry maintains a list of brokers (and, thus, producers associated with t
 
 ## Components
 ### Registry
+
+Registry is used to: register and keep track of data providers, as well as providing addresses of relevant brokers to the enquiring consumers. A REST API is used for communicating with the registry. The popular Flask web framework is used to serve HTTP requests.
+
+The registry maintains a list of brokers (and, thus, producers associated with them). For each producer-broker pair, we keep track of address of the broker, available sensors, current location, the time of last heartbeat and other information. At every change, the list is serialised and saved in a file (using Pickle). This allow to restore the state of the registry after it has crashed (on start, the contents of broker list are loaded from the serialised file).  
+
+The registry is responsible for spawning brokers for newly registered producers.
+
 ### Broker
 ### Producer
 ### Consumer
