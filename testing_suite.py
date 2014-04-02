@@ -53,15 +53,15 @@ def main():
 
 
     if (args.removeproducers):
-   
+   		
 
 
     if (args.replacebrokers):
-    
+    	
 
 
     if (args.rebuildregistry):
-
+    	
 
 
 

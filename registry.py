@@ -141,14 +141,6 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
 
     now = datetime.datetime.now()
 
-    # print "======================"
-    # for producer in producers.values():
-    #     print "$$$ PRODUCER : " + producer.producer_id
-    #     print " > BROKER : " + str(producer.broker_pid)
-    #     print "======================"
-
-    # print ""
-
     for producer in producers.values():
 
         if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
@@ -211,9 +203,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-r', '--rebuild', action='store_true')
+    parser.add_argument('-a', '--address')
+    parser.add_argument('-p', '--port')
 
     args = parser.parse_args()
     enablePickle = args.rebuild
+    address = args.address
+    port = args.port
 
     try:
         load_state()
@@ -222,5 +218,5 @@ if __name__ == "__main__":
         traceback.print_exc(file=sys.stdout)
 
     app.debug = False
-    app.run(host=constants.REGISTRY_HOST)
+    app.run(host=address, port=int(port))
 
