@@ -76,6 +76,7 @@ if __name__ == '__main__':
    parser.add_argument('-d', '--radius', type=int)
    parser.add_argument('-x', '--lat', type=str)
    parser.add_argument('-y', '--lng', type=str)
+   parser.add_argument('-o', '--outputfilename', type=str)
 
    args = parser.parse_args()
 
@@ -86,6 +87,7 @@ if __name__ == '__main__':
    registry_address = args.registry
    max_brokers = args.maxbrokers
    radius = args.radius
+   output = args.output
 
    #######################################
    ##    SHOULD PUT SOMETHING HERE TO   ##
@@ -104,7 +106,7 @@ if __name__ == '__main__':
 
    print "BROKER LIST : " + str(broker_list)
    if (broker_list):
-      io_file = open("output/" + str(os.getpid()) + ".csv", 'w+')
+      io_file = open("output/" + output + ".csv", 'w+')
       io_file.write("sensor,lat,lng,data,timestamp,time\n")
       for broker in broker_list:
          wsuri = broker['broker_address']
