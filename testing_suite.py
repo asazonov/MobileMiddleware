@@ -13,12 +13,12 @@ def test_broker_scalability(upper_bound):
 
     for x in range(upper_bound):
         consumer_list.append(subprocess.Popen(['python', 'consumer.py', '-r', 'http://127.0.0.1:5000', '-x' '55.75', '-y', '37.61', '-d', '500', '--maxbrokers', '1', '-s', 'camera,microphone,location', '-o', str(upper_bound) + '-' + str(x) ]))
-        time.sleep(0.35)
+        time.sleep(0)
 
 
     #exit_codes = [p.wait() for p in p1, p2]
 
-    time.sleep(120)
+    time.sleep(100) # / (upper_bound / 10))
     for consumer in consumer_list:
     	print "============ kill" 
         os.kill(consumer.pid, signal.SIGKILL)
@@ -46,23 +46,23 @@ def main():
     args = parser.parse_args()
 
     if (args.scalability):
-		consumer_bounds = [10, 20, 50, 100, 150, 200, 250, 300]
-		for consumer_bound in consumer_bounds:
-			test_broker_scalability(consumer_bound)
+        consumer_bounds = [  80, 160, 320] # 10, 20, 40 ] # 
+        for consumer_bound in consumer_bounds:
+            test_broker_scalability(consumer_bound)
 
-    if (args.tempinterrupt):
+    #if (args.tempinterrupt):
 
 
 
-    if (args.removeproducers):
+    #if (args.removeproducers):
    
 
 
-    if (args.replacebrokers):
+    #if (args.replacebrokers):
     
 
 
-    if (args.rebuildregistry):
+    #if (args.rebuildregistry):
 
 
 
