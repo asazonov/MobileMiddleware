@@ -12,8 +12,15 @@ import constants
 import os
 import pickle
 import signal
+<<<<<<< HEAD
+from tornado.wsgi import WSGIContainer
+from tornado.httpserver import HTTPServer
+from tornado.ioloop import IOLoop
+=======
 import sys, traceback
+>>>>>>> 77fa278a9a28293ec82948036eec09c193ecef6e
 
+from gevent.wsgi import WSGIServer
 producers = {}
 
 class Producer(object):
@@ -207,11 +214,17 @@ def get_best_producer(sensors, lat, lng):
 
 if __name__ == "__main__":
     try:
-        producers = pickle.load( open( "producers.p", "rb" ) )
+        print "Pickles disabled"
+        #producers = pickle.load( open( "producers.p", "rb" ) )
         remove_dead_producers()
     except:
         traceback.print_exc(file=sys.stdout)
         print "No pickle yet!"
-    app.debug = True
+    app.debug = False
     app.run(host='127.0.0.1')
+    #http_server = HTTPServer(WSGIContainer(app))
+    #http_server.listen(5000)
+    #IOLoop.instance().start()
+    #http_server = WSGIServer(('', 5000), app)
+    #http_server.serve_forever()
     #lol

@@ -12,6 +12,7 @@ import requests
 import json
 import os
 import datetime
+import time
 import constants
 
 brokers_list = []
@@ -32,6 +33,7 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
          print "Received event: ", topic, event
       
       def save_to_file(topic, event):
+         #print event
          io_file.write(str(str(event['sensor']) + "," + event['lat']) + "," + str(event['lng']) + "," + str(event['data']) + "," + str(event['timestamp']) + "," + str((datetime.datetime.now() - datetime.datetime.strptime(event['timestamp'], "%Y-%m-%d %H:%M:%S.%f")).total_seconds()) + "\n")
          io_file.flush()
       for sensor in sensors.split(","):
@@ -80,10 +82,16 @@ def request_brokers_l(registry_address, location, radius, max_brokers, sensors):
 def request_brokers_xy(registry_address, lat, lng, radius, max_brokers, sensors):
    """Request a list of up to max_brokers brokers based on coordinates"""
    payload = {'lat': lat, 'lng' : lng, 'max_brokers' : max_brokers, 'radius' : radius, 'sensors' : sensors}
-   req = requests.get(registry_address + "/request_brokers", params=payload)
-   response_json = req.text
-   response = json.loads(response_json)
-   return response
+   try: 
+      req = requests.get(registry_address + "/request_brokers", params=payload) 
+      response_json = req.text
+      response = json.loads(response_json)
+      return response
+   except requests.exceptions.RequestException:
+      print "Trying to get the broker again"
+      time.sleep(0.5)
+      request_brokers_xy(registry_address, lat, lng, radius, max_brokers, sensors)
+
 
 if __name__ == '__main__':
    log.startLogging(sys.stdout)
