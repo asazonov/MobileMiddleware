@@ -15,7 +15,7 @@ import signal
 import sys, traceback
 
 
-
+from gevent.wsgi import WSGIServer
 producers = {}
 
 class Producer(object):

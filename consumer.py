@@ -57,11 +57,11 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
       #       factory.protocol = SensorDataConsumerClientProtocol
       #       connectWS(factory)
 
-   def onClose(self, wasClean, code, reason):
-         if ((not wasClean) and reason == constants.UNCLEAN_BROKER_DISCONNECT):
-            current_brokers -= 1
-            if current_brokers == 0:
-               exit(0)
+   # def onClose(self, wasClean, code, reason):
+   #       if ((not wasClean) and reason == constants.UNCLEAN_BROKER_DISCONNECT):
+   #          current_brokers -= 1
+   #          if current_brokers == 0:
+   #             exit(0)
 
 def request_broker_address(registry_address,location):
    """Request one broker"""

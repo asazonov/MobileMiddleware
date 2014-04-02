@@ -38,7 +38,6 @@ if __name__ == '__main__':
    parser.add_argument('-s', '--sensors', type=str)
 
    args = parser.parse_args()
-   print "sensorssensorssensors"  + sensors
    port = args.port
    tcp = args.tcp
    sensors = ast.literal_eval(args.sensors)
