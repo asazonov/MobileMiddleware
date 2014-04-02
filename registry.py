@@ -104,6 +104,11 @@ def register_producer():
     response_json = json.dumps(response)
     return response_json
 
+@app.route("/clean_producers", methods=['GET'])
+def clean_producers():
+    remove_dead_producers()
+    return "Dead producers removed"
+
 @app.route("/request_brokers", methods=['GET'])
 def request_brokers():
     location = request.args.get('location', type=str)
