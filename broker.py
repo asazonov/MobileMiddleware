@@ -12,6 +12,7 @@ from autobahn.wamp1.protocol import WampServerFactory, \
 
 import argparse
 import ast
+import constants
 
 sensors = ""
 
@@ -42,7 +43,7 @@ if __name__ == '__main__':
    tcp = args.tcp
    sensors = ast.literal_eval(args.sensors)
 
-   wampFactory = WampServerFactory("ws://localhost:" + str(port), debugWamp = False)
+   wampFactory = WampServerFactory("ws://" + constants.BROKER_HOST + ":" + str(port), debugWamp = False)
    wampFactory.protocol = MyPubSubServerProtocol
    listenWS(wampFactory)
 

@@ -33,8 +33,6 @@ def test_broker_scalability(upper_bound):
 
 
 def main():
-
-
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-s', '--scalability', action='store_true')
@@ -46,9 +44,9 @@ def main():
     args = parser.parse_args()
 
     if (args.scalability):
-		consumer_bounds = [10, 20, 50, 100, 150, 200, 250, 300]
-		for consumer_bound in consumer_bounds:
-			test_broker_scalability(consumer_bound)
+        consumer_bounds = [10, 20, 50, 100, 150, 200, 250, 300]
+        for consumer_bound in consumer_bounds:
+            test_broker_scalability(consumer_bound)
 
     if (args.tempinterrupt):
 

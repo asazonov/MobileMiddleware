@@ -13,29 +13,35 @@ import os
 import pickle
 import signal
 import sys, traceback
+import argparse
 
 
 
 producers = {}
+enablePickle = False
 
 class Producer(object):
     """docstring for Sensor"""
     def __init__(self, producer_id,  sensors, lat, lng, access_time, broker_address, broker_pid):
         super(Producer, self).__init__()
         self.sensors = sensors
-        #self.location = location
         self.lat = lat
         self.lng = lng
         self.access_time = access_time
         self.broker_address = broker_address
         self.producer_id = producer_id
         self.broker_pid = broker_pid
-        # print "###BROKER PID : " + str(broker_pid) + " ###"
-        #self.http_port = http
 
     def __str__(self):
         return str([self.producer_id, self.sensors, self.lat, self.lng, self.access_time, self.broker_address, self.broker_pid])
 
+def save_state(producers):
+    if (enablePickle):
+        pickle.dump(producers, open( "producers.p", "wb" ))
+
+def load_state():
+    if enablePickle and os.path.isfile("producers.p"):
+        producers = pickle.load(open( "producers.p", "rb" ))
 
 @app.route("/list_brokers", methods=['GET'])
 def list_brokers():
@@ -55,11 +61,11 @@ def replace_broker():
     open_port2 = pick_unused_port()
     BROKER_COMMAND = ['nohup','python', "broker.py", "-p" + str(open_port), "-t" + str(open_port2), "-s", str(producer.sensors)]
     broker = subprocess.Popen(BROKER_COMMAND, stdout=open('/dev/null', 'w'), stderr=open('logfile.log', 'a'), preexec_fn=os.setpgrp, close_fds = True)
-    broker_address = "ws://localhost:" + str(open_port)
+    broker_address = "ws://" + constants.BROKER_HOST + ":" + str(open_port)
     producer.broker_address = broker_address
     producer.broker_pid = broker.pid
     producers[producer_id] = producer
-    pickle.dump(producers, open( "producers.p", "wb" ))
+    save_state(producers)
     response = {"broker_address" : producers[producer_id].broker_address}
     response_json = json.dumps(response)
     return response_json
@@ -71,7 +77,7 @@ def register_producer():
 
     if producer_id in producers:
         producers[producer_id].access_time = datetime.datetime.now()
-        pickle.dump(producers, open( "producers.p", "wb" ))
+        save_state(producers)
     else:
         sensors = request.args.get('sensors', type=str).split(",")
         lat = request.args.get('lat', type=str)
@@ -79,25 +85,18 @@ def register_producer():
         access_time = datetime.datetime.now()
         #geocoder = geocoders.GoogleV3()
 
-        # Unicode in Python 2 :-(
         #location = unicode(geocoder.reverse(Point(lat, lng))[0]).encode('utf-8') 
         open_port = pick_unused_port()
         open_port2 = pick_unused_port()
-        #spawn_demon("/usr/bin/say", "/Users/alehins/Documents/StAndrews/CT/MobileMiddleware/server.py -p " + str(open_port))
-        #spawn_demon("say hi")
-        # cmd = ['python', "D:\Andrew\Documents\GitHub\MobileMiddleware\server.py", "-p" + str(open_port), "-t" + str(open_port2)]
-        #subprocess.Popen(cmd)
-        #spawn_daemon(cmd)
-        #spawn_daemon(cmd)
         BROKER_COMMAND = ['nohup','python', "broker.py", "-p" + str(open_port), "-t" + str(open_port2), "-s", str(sensors)]
         broker = subprocess.Popen(BROKER_COMMAND, stdout=open('/dev/null', 'w'), stderr=open('logfile.log', 'a'), preexec_fn=os.setpgrp, close_fds = True)
         access_time = datetime.datetime.now()
-        broker_address = "ws://localhost:" + str(open_port)
+        broker_address = "ws://" + constants.BROKER_HOST + ":" + str(open_port)
 
         producer = Producer(producer_id, sensors, lat, lng, access_time, broker_address, broker.pid)
         # producer = Producer(sensors, location, lat, lng, access_time, broker_address)
         producers[producer_id] = producer
-        pickle.dump(producers, open( "producers.p", "wb" ))
+        save_state(producers)
         print "###BROKER PID [register producer]: " + str(producer.broker_pid) + " ###"
 
 
@@ -142,13 +141,13 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
 
     now = datetime.datetime.now()
 
-    print "======================"
-    for producer in producers.values():
-        print "$$$ PRODUCER : " + producer.producer_id
-        print " > BROKER : " + str(producer.broker_pid)
-        print "======================"
+    # print "======================"
+    # for producer in producers.values():
+    #     print "$$$ PRODUCER : " + producer.producer_id
+    #     print " > BROKER : " + str(producer.broker_pid)
+    #     print "======================"
 
-    print ""
+    # print ""
 
     for producer in producers.values():
 
@@ -160,7 +159,8 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
 
             os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer
             producers.pop(producer.producer_id)
-            pickle.dump(producers, open( "producers.p", "wb" ))
+            if (enablePickle): 
+                pickle.dump(producers, open( "producers.p", "wb" ))
             continue
 
         if (current < max):
@@ -182,7 +182,7 @@ def remove_dead_producers():
             os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer
             os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer
             producers.pop(producer.producer_id)
-            pickle.dump(producers, open( "producers.p", "wb" ))
+            save_state(producers)
             continue
 
 def get_best_producer(sensors, lat, lng):
@@ -208,18 +208,19 @@ def get_best_producer(sensors, lat, lng):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-r', '--rebuild', action='store_true')
+
+    args = parser.parse_args()
+    enablePickle = args.rebuild
+
     try:
-        print "Pickles disabled"
-        #producers = pickle.load( open( "producers.p", "rb" ) )
+        load_state()
         remove_dead_producers()
     except:
         traceback.print_exc(file=sys.stdout)
-        print "No pickle yet!"
+
     app.debug = False
-    app.run(host='127.0.0.1')
-    #http_server = HTTPServer(WSGIContainer(app))
-    #http_server.listen(5000)
-    #IOLoop.instance().start()
-    #http_server = WSGIServer(('', 5000), app)
-    #http_server.serve_forever()
-    #lol
+    app.run(host=constants.REGISTRY_HOST)
+
