@@ -68,7 +68,7 @@ class ProducerPubSubProtocol(WampClientProtocol):
 
       def onMyEvent1(topic, event):
          print "Received event", topic, event
-         
+
       def heartbeat():
          advertise_availability()
          reactor.callLater(constants.HEARTBEAT_RATE, heartbeat)
@@ -92,11 +92,6 @@ class ProducerPubSubProtocol(WampClientProtocol):
       for sensor in sensors:
          self.subscribe(sensor, onMyEvent1)
          start_publishing_sensor(sensor, constants.PUBLISHING_INTERVAL, lat, lng)
-
-
-
-      
-
 
 def replace_broker():
    payload = {'producer_id' : producer_id}
