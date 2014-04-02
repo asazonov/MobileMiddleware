@@ -50,16 +50,13 @@ def advertise_availability():
 class ProducerPubSubProtocol(WampClientProtocol):
    """
    Protocol class for the producer
-   """
-
+   """   
    def onSessionOpen(self):
 
       print "Connected!"
 
       def onMyEvent1(topic, event):
          print "Received event", topic, event
-
-      #self.subscribe("http://example.com/myEvent1", onMyEvent1)
 
       self.counter = 0
 
@@ -85,20 +82,30 @@ class ProducerPubSubProtocol(WampClientProtocol):
          reactor.callLater(constants.HEARTBEAT_RATE, heartbeat)
 
       heartbeat()
-      #start_publishing_sensor("http://example.com/myEvent1", 0.1, lat, lng)
 
 
    def onClose(self, wasClean, code, reason):
       print "Connection closed", reason
-      reactor.stop()
+      if reason == constants.UNCLEAN_BROKER_DISCONNECT:
+         print "Broker dead. Re-initialising producer with registry"
+         initialise_broker()
+      else:
+         reactor.stop()
 
+def initialise_broker():
+   wsuri = advertise_availability()
+   print "Connecting to", wsuri
+
+   factory = WampClientFactory(wsuri, debugWamp = False)
+   factory.protocol = ProducerPubSubProtocol
+   connectWS(factory)
 
 if __name__ == '__main__':
 
    log.startLogging(sys.stdout)
 
    parser = argparse.ArgumentParser()
-   #parser.add_argument('-t', '--tcp', type=int)
+   parser.add_argument('-t', '--tcp', type=int)
    parser.add_argument('-r', '--registry', type=str)
    parser.add_argument('-s', '--sensors', type=str)
    parser.add_argument('-x', '--lat', type=str)
@@ -117,15 +124,6 @@ if __name__ == '__main__':
    lat = args.lat
    lng = args.lng
 
-   wsuri = advertise_availability()
-   print "Connecting to", wsuri
-
-   ## our WAMP/WebSocket client
-   ##
-   factory = WampClientFactory(wsuri, debugWamp = False)
-   factory.protocol = ProducerPubSubProtocol
-   connectWS(factory)
-
-   ## run the Twisted network reactor
-   ##
+   initialise_broker()  
    reactor.run()
+   

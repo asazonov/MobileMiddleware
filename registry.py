@@ -79,22 +79,10 @@ def register_producer():
         print "###BROKER PID [register producer]: " + str(producer.broker_pid) + " ###"
 
 
+    ## TODO: if broker is dead, get a new one for the producer to use
     response = {"broker_address" : producers[producer_id].broker_address} #, "http_port" : open_port2}
     response_json = json.dumps(response)
     return response_json
-
-
-# @app.route("/request_broker", methods=['GET'])
-# def request_broker():
-#     location = request.args.get('location', type=str)
-#     print "location", location
-#     #request_parameters = request.args
-#     geocoder = geocoders.GoogleV3()
-#     place, (lat, lng) = geocoder.geocode(location) 
-#     producer = get_best_producer(["camera", "microphone", "location"], lat, lng)
-#     response = {"broker_address" : producer.broker_address, "lat" : producer.lat, "lng" : producer.lng}
-#     response_json = json.dumps(response)
-#     return response_json
 
 @app.route("/request_brokers", methods=['GET'])
 def request_brokers():
