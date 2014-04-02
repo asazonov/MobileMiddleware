@@ -1,12 +1,3 @@
-import sys
-
-from twisted.python import log
-from twisted.internet import reactor
-
-from autobahn.twisted.websocket import connectWS
-
-from autobahn.wamp1.protocol import WampClientFactory, \
-                                    WampClientProtocol
 import argparse
 import random
 import requests
@@ -15,42 +6,58 @@ import time
 import datetime
 import random
 import string
-import constants
 import sys
+import constants
+from twisted.python import log
+from twisted.internet import reactor
+from autobahn.twisted.websocket import connectWS
+from autobahn.wamp1.protocol import WampClientFactory, \
+                                    WampClientProtocol
+
 
 def generate_random_data(size=30, chars=string.ascii_letters + string.digits):
+   """Generates a random string"""
    return ''.join(random.choice(chars) for _ in range(size))
 
 registry_address = "" 
 available_sensors = ""
 lat = ""
 lng = ""
-producer_id = generate_random_data() # 30 characters, letters + digists. Probably enough for a random ID
+producer_id = generate_random_data() # 30 characters, letters + digits
 heartbeats_skipped = 0
 
 def advertise_availability():
+   """Declare location and available sensors to registry"""
    payload = {'producer_id' : producer_id, 'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
-   global heartbeats_skipped  
+   global heartbeats_skipped
    try:
       req = requests.get(registry_address+"/register_producer", params=payload)
       response_json = req.text
       response = json.loads(response_json)
-      time.sleep(2) # a dirty hack. We need to give time for the broker to initialise
+      time.sleep(1) # give time for broker to initialise
       heartbeats_skipped = 0
-      print "Heartbeat"
+      # print "Heartbeat"
       return response["broker_address"]
    except:
-      print "Heartbeat skipped"
+      # print "Heartbeat skipped"
       heartbeats_skipped += 1
       if heartbeats_skipped > constants.MAX_HEARTBEATS_SKIPPED:
          print heartbeats_skipped + " heartbeats skipped. Exiting..."
          sys.exit()
 
+class MyProducerFactory(WampClientFactory):
+   """Factory class for the producer"""
+   def clientConnectionLost(self, connector, reason):
+      print "Broker dead. Re-initialising producer with registry"
+      try:
+         replace_broker()
+      except:
+         reactor.stop()
+         exit(0)
+
 
 class ProducerPubSubProtocol(WampClientProtocol):
-   """
-   Protocol class for the producer
-   """   
+   """Protocol class for the producer"""   
    def onSessionOpen(self):
 
       print "Connected!"
@@ -75,7 +82,7 @@ class ProducerPubSubProtocol(WampClientProtocol):
 
       for sensor in sensors:
          self.subscribe(sensor, onMyEvent1)
-         start_publishing_sensor(sensor, 1, lat, lng)
+         start_publishing_sensor(sensor, constants.PUBLISHING_INTERVAL, lat, lng)
       
       def heartbeat():
          advertise_availability()
@@ -84,13 +91,13 @@ class ProducerPubSubProtocol(WampClientProtocol):
       heartbeat()
 
 
-   def onClose(self, wasClean, code, reason):
-      print "Connection closed", reason
-      if reason == constants.UNCLEAN_BROKER_DISCONNECT:
-         print "Broker dead. Re-initialising producer with registry"
-         replace_broker()
-      else:
-         reactor.stop()
+   # def onClose(self, wasClean, code, reason):
+   #    print "Connection closed", reason
+   #    if reason == constants.UNCLEAN_BROKER_DISCONNECT:
+   #       print "Broker dead. Re-initialising producer with registry"
+   #       replace_broker()
+   #    else:
+   #       reactor.stop()
 
 def replace_broker():
    payload = {'producer_id' : producer_id}
@@ -106,7 +113,7 @@ def replace_broker():
 
 def initialise_broker(socket_address):
    print "Connecting to", socket_address
-   factory = WampClientFactory(socket_address, debugWamp = False)
+   factory = MyProducerFactory(socket_address, debugWamp = False)
    factory.protocol = ProducerPubSubProtocol
    connectWS(factory)
 

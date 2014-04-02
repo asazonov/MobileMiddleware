@@ -12,9 +12,13 @@ import constants
 import os
 import pickle
 import signal
+<<<<<<< HEAD
 from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
+=======
+import sys, traceback
+>>>>>>> 77fa278a9a28293ec82948036eec09c193ecef6e
 
 from gevent.wsgi import WSGIServer
 producers = {}
@@ -35,7 +39,7 @@ class Producer(object):
         #self.http_port = http
 
     def __str__(self):
-        return str([self.producer_id, self.sensors, self.lat, self.lng, self.access_time, self.broker_address, broker_pid])
+        return str([self.producer_id, self.sensors, self.lat, self.lng, self.access_time, self.broker_address, self.broker_pid])
 
 
 @app.route("/list_brokers", methods=['GET'])
@@ -107,6 +111,11 @@ def register_producer():
     response_json = json.dumps(response)
     return response_json
 
+@app.route("/clean_producers", methods=['GET'])
+def clean_producers():
+    remove_dead_producers()
+    return "Dead producers removed"
+
 @app.route("/request_brokers", methods=['GET'])
 def request_brokers():
     location = request.args.get('location', type=str)
@@ -138,6 +147,7 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
 
     now = datetime.datetime.now()
 
+    print "======================"
     for producer in producers.values():
         print "$$$ PRODUCER : " + producer.producer_id
         print " > BROKER : " + str(producer.broker_pid)
@@ -170,13 +180,15 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
     return relevant_producers
 
 def remove_dead_producers():
-    for producers in producers.values():
+    now = datetime.datetime.now()
+    for producer in producers.values():
         if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
+            print "Removing producer " + producer.producer_id
+            os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer
             os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer
             producers.pop(producer.producer_id)
             pickle.dump(producers, open( "producers.p", "wb" ))
             continue
-
 
 def get_best_producer(sensors, lat, lng):
     # list of producers that have the requested sensors
@@ -202,10 +214,11 @@ def get_best_producer(sensors, lat, lng):
 
 if __name__ == "__main__":
     try:
-        #producers = pickle.load( open( "producers.p", "rb" ) )
         print "Pickles disabled"
-        #remove_dead_producers
+        #producers = pickle.load( open( "producers.p", "rb" ) )
+        remove_dead_producers()
     except:
+        traceback.print_exc(file=sys.stdout)
         print "No pickle yet!"
     app.debug = False
     app.run(host='127.0.0.1')
