@@ -30,6 +30,7 @@ heartbeats_skipped = 0
 
 def advertise_availability():
    payload = {'producer_id' : producer_id, 'sensors': available_sensors, 'lat' : lat, 'lng' : lng}
+   global heartbeats_skipped  
    try:
       req = requests.get(registry_address+"/register_producer", params=payload)
       response_json = req.text
@@ -41,7 +42,7 @@ def advertise_availability():
    except:
       print "Heartbeat skipped"
       heartbeats_skipped += 1
-      if heartbeats_skipped > MAX_HEARTBEATS_SKIPPED:
+      if heartbeats_skipped > constants.MAX_HEARTBEATS_SKIPPED:
          print heartbeats_skipped + " heartbeats skipped. Exiting..."
          sys.exit()
 
