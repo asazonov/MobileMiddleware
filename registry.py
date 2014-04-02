@@ -15,8 +15,6 @@ import signal
 import sys, traceback
 import argparse
 
-
-
 producers = {}
 enablePickle = False
 
@@ -50,7 +48,6 @@ def list_brokers():
     for producer in producers.values():
         resp += "<p>" + str(producer) + "</p>"
     return resp
-
 
 @app.route("/replace_broker", methods=['GET'])
 def replace_broker():
@@ -99,9 +96,7 @@ def register_producer():
         save_state(producers)
         print "###BROKER PID [register producer]: " + str(producer.broker_pid) + " ###"
 
-
-    ## TODO: if broker is dead, get a new one for the producer to use
-    response = {"broker_address" : producers[producer_id].broker_address} #, "http_port" : open_port2}
+    response = {"broker_address" : producers[producer_id].broker_address}
     response_json = json.dumps(response)
     return response_json
 
@@ -145,8 +140,6 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
 
         if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
             print "Removing producer " + producer.producer_id
-            # print "###BROKER PID [get_relevant]: " + str(producer.broker_pid.pid) + " ###"
-            # print "###BROKER PID [get_relevant]: " + str(int(producer.broker_pid)) + " ###"
             print "Removing broker " + str(producer.broker_pid)
 
             os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer

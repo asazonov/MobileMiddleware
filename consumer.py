@@ -16,9 +16,9 @@ import time
 import constants
 
 brokers_list = []
-current_brokers = 0
-max_brokers = 0
 use_xy = True
+# current_brokers = 0
+# max_brokers = 0
 
 class SensorDataConsumerClientProtocol(WampClientProtocol):
    """
@@ -33,12 +33,10 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
          print "Received event: ", topic, event
       
       def save_to_file(topic, event):
-         #print event
          io_file.write(str(str(event['sensor']) + "," + event['lat']) + "," + str(event['lng']) + "," + str(event['data']) + "," + str(event['timestamp']) + "," + str((datetime.datetime.now() - datetime.datetime.strptime(event['timestamp'], "%Y-%m-%d %H:%M:%S.%f")).total_seconds()) + "\n")
          io_file.flush()
       for sensor in sensors.split(","):
          self.subscribe(sensor, save_to_file)
-         # self.subscribe(sensor, default_response)
 
 
       # def rediscover_brokers(current_brokers, max_brokers):
@@ -56,12 +54,6 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
       #       factory = WampClientFactory(wsuri, debugWamp = False)
       #       factory.protocol = SensorDataConsumerClientProtocol
       #       connectWS(factory)
-
-   # def onClose(self, wasClean, code, reason):
-   #       if ((not wasClean) and reason == constants.UNCLEAN_BROKER_DISCONNECT):
-   #          current_brokers -= 1
-   #          if current_brokers == 0:
-   #             exit(0)
 
 def request_broker_address(registry_address,location):
    """Request one broker"""
@@ -99,7 +91,7 @@ if __name__ == '__main__':
    # Deal with command line arguments
    parser = argparse.ArgumentParser()
    parser.add_argument('-r', '--registry', type=str)
-   parser.add_argument('-s', '--sensors') #, nargs='+', type=str)
+   parser.add_argument('-s', '--sensors', type=str)
    parser.add_argument('-l', '--location', type=str)
    parser.add_argument('-b', '--maxbrokers', type=int)
    parser.add_argument('-d', '--radius', type=int)
@@ -117,12 +109,6 @@ if __name__ == '__main__':
    max_brokers = args.maxbrokers
    radius = args.radius
    output = args.outputfilename
-
-   #######################################
-   ##    SHOULD PUT SOMETHING HERE TO   ##
-   ##    CHECK COMMAND ARGS AND QUIT    ##
-   ##       IF THEY AREN'T CORRECT      ##
-   #######################################
 
    ## loops through brokers in broker list, connecting to each
    if (location != None):

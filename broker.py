@@ -1,32 +1,23 @@
 import sys
-
 from twisted.python import log
 from twisted.internet import reactor
 from twisted.web.server import Site
 from twisted.web.static import File
-
 from autobahn.twisted.websocket import listenWS
-
 from autobahn.wamp1.protocol import WampServerFactory, \
                                     WampServerProtocol
-
 import argparse
 import ast
 import constants
 
 sensors = ""
 
-
 class MyPubSubServerProtocol(WampServerProtocol):
-   """
-   Protocol class for our simple demo WAMP server.
-   """
-
+   """Protocol class for our simple demo WAMP server."""
    def onSessionOpen(self):
       ## When the WAMP session to a client has been established,
       ## register a single fixed URI as PubSub topic that our
       ## message broker will handle
-      ##
       for sensor in sensors:
          self.registerForPubSub(sensor)
 
@@ -48,10 +39,8 @@ if __name__ == '__main__':
    listenWS(wampFactory)
 
    ## our Web server (for static Web content)
-   ##
    webFactory = Site(File("."))
    reactor.listenTCP(int(tcp), webFactory)
 
    ## run the Twisted network reactor
-   ##
    reactor.run()
