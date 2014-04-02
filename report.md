@@ -90,10 +90,6 @@ The consumer has a list of brokers (obtained from the registry via the REST API)
 ## Components
 
 
-![la lune](lalune.jpg "Voyage to the moon") ––– EXAMPLE OF AN IMAGE
-
-
-
 
 
 ### Registry
@@ -183,19 +179,19 @@ As the system is built on top of TCP, messages are guaranteed to arrive in order
 If a producer unexpectedly dies (or loses connectivity, e.g. because the device went into a tunnel) the registry will stop receiving its heartbeat. After a timeout period the producer will be considered gone for good, meaning its broker must be killed and its details removed from the registry. To test this, the registry and three producers (in Moscow) were run. After this stage, the list of brokers looked as follows:
 
 
-![Initial list of producers](/images/1-clean_producers/small_test_1-1.png)
+![Initial list of producers](images/1-clean_producers/small_test_1-1.png)
 
 
 Two of the producers were then killed (by sending SIGINT from the terminal). After this, the list of producers was still the same, as the registry only cleans up the producer list either when a consumer requests data from new producers or when it is explicitly told to (via the /clean_producers API call). After this call was made, the list looked as follows:
 
 
-![Cleaned list of producers](/images/1-clean_producers/small_test_1-3.png)
+![Cleaned list of producers](images/1-clean_producers/small_test_1-3.png)
 
 
 When the command is called, the registry prints the ID of any producer which is being removed to its output stream, which is shown below just for more confirmation that it actually did happen.
 
 
-![Producers which are being removed](/images/1-clean_producers/small_test_1-4.png)
+![Producers which are being removed](images/1-clean_producers/small_test_1-4.png)
 
 
 ### Reconnecting With Producers Whose Broker has Died

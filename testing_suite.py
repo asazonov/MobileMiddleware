@@ -44,7 +44,7 @@ def main():
 
     if (args.scalability):
 
-        consumer_bounds = [10, 20, 40, 80, 160, 320
+        consumer_bounds = [10, 20, 40, 80, 160, 320]
         for consumer_bound in consumer_bounds:
             test_broker_scalability(consumer_bound)
 
