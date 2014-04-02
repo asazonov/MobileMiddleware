@@ -75,7 +75,7 @@ class ProducerPubSubProtocol(WampClientProtocol):
 
       for sensor in sensors:
          self.subscribe(sensor, onMyEvent1)
-         start_publishing_sensor(sensor, 1, lat, lng)
+         start_publishing_sensor(sensor, constants.PUBLISHING_INTERVAL, lat, lng)
       
       def heartbeat():
          advertise_availability()

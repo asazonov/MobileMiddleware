@@ -12,8 +12,12 @@ import requests
 import json
 import os
 import datetime
+import constants
 
 brokers_list = []
+current_brokers = 0
+max_brokers = 0
+use_xy = True
 
 class SensorDataConsumerClientProtocol(WampClientProtocol):
    """
@@ -23,6 +27,7 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
    def onSessionOpen(self):
 
       print "Connected to ", wsuri
+      # reactor.callLater(constants.REDISCOVERY_INTERVAL, rediscover_brokers, current_brokers=global.current_brokers, max_brokers=global.max_brokers)
 
       def default_response(topic, event):
          print "Received event", topic, event
@@ -37,11 +42,35 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
          self.subscribe(sensor, save_to_file)
          # self.subscribe(sensor, default_response)
 
+
+      # def rediscover_brokers(current_brokers, max_brokers):
+      #    if (current_brokers < max_brokers):
+      #       if (use_xy):
+      #          broker_list = request_brokers_xy(registry_address, lat, lng, radius, max_brokers, sensors)
+      #       else:
+      #          broker_list = request_brokers_l(registry_address, location, radius, max_brokers, sensors)
+      #       update_broker_list();
+
+      # def update_broker_list():
+      #    for broker in broker_list:
+      #       wsuri = broker['broker_address']
+      #       print "Connecting to", wsuri
+      #       factory = WampClientFactory(wsuri, debugWamp = False)
+      #       factory.protocol = SensorDataConsumerClientProtocol
+      #       connectWS(factory)
+
+
       #self.subscribe("location", default_response)
       #self.subscribe("http://example.com/myEvent1", default_response) # hardwired for testing
 
-   def clientConnectionLost(connector, reason):
+   def clientConnectionLost(self, wasClean, code, reason):
          print "### LOST CONNECTION : " + reason + " ###"
+
+   def onClose(self, wasClean, code, reason):
+         if ((not wasClean) and reason == constants.UNCLEAN_BROKER_DISCONNECT):
+            current_brokers -= 1
+            if current_brokers == 0:
+               exit(0)
 
 def request_broker_address(registry_address,location):
    payload = {'location': location}
@@ -87,7 +116,7 @@ if __name__ == '__main__':
    registry_address = args.registry
    max_brokers = args.maxbrokers
    radius = args.radius
-   output = args.output
+   output = args.outputfilename
 
    #######################################
    ##    SHOULD PUT SOMETHING HERE TO   ##
@@ -97,11 +126,13 @@ if __name__ == '__main__':
 
    ## loops through brokers in broker list, connecting to each
    if (location != None):
+      use_xy = False
       broker_list = request_brokers_l(registry_address, location, radius, max_brokers, sensors)
    else:
       if (lat == None or lng == None):
          print "ERROR - must have either location (-l) or latitude (-x) and longitude (-y)"
          exit()
+      use_xy = True
       broker_list = request_brokers_xy(registry_address, lat, lng, radius, max_brokers, sensors)
 
    print "BROKER LIST : " + str(broker_list)

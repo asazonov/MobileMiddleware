@@ -12,6 +12,7 @@ import constants
 import os
 import pickle
 import signal
+import sys, traceback
 
 producers = {}
 
@@ -31,7 +32,7 @@ class Producer(object):
         #self.http_port = http
 
     def __str__(self):
-        return str([self.producer_id, self.sensors, self.lat, self.lng, self.access_time, self.broker_address, broker_pid])
+        return str([self.producer_id, self.sensors, self.lat, self.lng, self.access_time, self.broker_address, self.broker_pid])
 
 
 @app.route("/list_brokers", methods=['GET'])
@@ -134,6 +135,7 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
 
     now = datetime.datetime.now()
 
+    print "======================"
     for producer in producers.values():
         print "$$$ PRODUCER : " + producer.producer_id
         print " > BROKER : " + str(producer.broker_pid)
@@ -166,13 +168,15 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
     return relevant_producers
 
 def remove_dead_producers():
-    for producers in producers.values():
+    now = datetime.datetime.now()
+    for producer in producers.values():
         if ((now - producer.access_time).total_seconds() > constants.HEARTBEAT_RATE_OUTDATED):
+            print "Removing producer " + producer.producer_id
+            os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer
             os.kill(producer.broker_pid, signal.SIGKILL) # kill broker associated with the producer
             producers.pop(producer.producer_id)
             pickle.dump(producers, open( "producers.p", "wb" ))
             continue
-
 
 def get_best_producer(sensors, lat, lng):
     # list of producers that have the requested sensors
@@ -199,8 +203,9 @@ def get_best_producer(sensors, lat, lng):
 if __name__ == "__main__":
     try:
         producers = pickle.load( open( "producers.p", "rb" ) )
-        remove_dead_producers
+        remove_dead_producers()
     except:
+        traceback.print_exc(file=sys.stdout)
         print "No pickle yet!"
     app.debug = True
     app.run(host='127.0.0.1')
