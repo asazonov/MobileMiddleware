@@ -4,8 +4,6 @@
 
 Modern mobile devices are equipped with various complex sensors -- accelerometers, location, video, audio, temperature, altitude, etc. Not all of them provide scientific-grade precision or update frequency. However these disadvantage are often compensated by ubiquity and availability of such devices, allowing unprecedented deployment scale for scientific experiments.
 
-It was decided that a producer must send the data only to one source. Implementing data broadcasting through the producer would not be acceptable, since mobile devices are often limited in bandwidth. 
-
 # Design
 
 ## Key protocols
@@ -25,6 +23,10 @@ WebSockets are supported by most of the modern desktop and mobile browsers (thro
 Representational state transfer (REST) is a set of principles that uses Web standards (such as HTTP and URL) to structure application-to-application communication. The system operates through a REST API, the registry offering various methods to clients (e.g. '/register_producer', '/request_brokers') which are called via GET requests.
 
 
+### Producer
+
+It was decided that a producer must send the data only to one source. Multiple consumers might be interested in the data provided by the producer, which would cause scalability issues in the case of direct producer-to-consumer communication. Implementing data broadcasting through the producer would not be acceptable, since mobile devices are often limited in bandwidth. Therefore, the producer should never directly communicate with the consumers, broadcasting its messages though a proxy -- a broker.
+
 ## Components
 ### Registry
 
@@ -33,7 +35,6 @@ Representational state transfer (REST) is a set of principles that uses Web stan
 
 
 
-### Producer
 
 ### Consumer
 
