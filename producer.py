@@ -88,15 +88,25 @@ class ProducerPubSubProtocol(WampClientProtocol):
       print "Connection closed", reason
       if reason == constants.UNCLEAN_BROKER_DISCONNECT:
          print "Broker dead. Re-initialising producer with registry"
-         initialise_broker()
+         replace_broker()
       else:
          reactor.stop()
 
-def initialise_broker():
-   wsuri = advertise_availability()
-   print "Connecting to", wsuri
+def replace_broker():
+   payload = {'producer_id' : producer_id}
+   try:
+      req = requests.get(registry_address+"/replace_broker", params=payload)
+      response_json = req.text
+      response = json.loads(response_json)
+      time.sleep(2) # a dirty hack. We need to give time for the broker to initialise
+      initialise_broker(response["broker_address"])
+   except:
+      print "Registry connectivity error - Unable to receive new broker"
+      sys.exit()
 
-   factory = WampClientFactory(wsuri, debugWamp = False)
+def initialise_broker(socket_address):
+   print "Connecting to", socket_address
+   factory = WampClientFactory(socket_address, debugWamp = False)
    factory.protocol = ProducerPubSubProtocol
    connectWS(factory)
 
@@ -111,8 +121,6 @@ if __name__ == '__main__':
    parser.add_argument('-x', '--lat', type=str)
    parser.add_argument('-y', '--lng', type=str)
 
-
-
    args = parser.parse_args()
 
    sensors = args.sensors.split(",")
@@ -124,6 +132,6 @@ if __name__ == '__main__':
    lat = args.lat
    lng = args.lng
 
-   initialise_broker()  
+   wsuri = advertise_availability()
+   initialise_broker(wsuri)  
    reactor.run()
-   

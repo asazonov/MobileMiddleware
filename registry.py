@@ -43,11 +43,9 @@ def list_brokers():
     return resp
 
 
-@app.route("/request_new_broker", methods=['GET'])
-def request_new_broker():
-"""
-Used by the producer to request a new broker, if the initial one dies
-"""
+@app.route("/replace_broker", methods=['GET'])
+def replace_broker():
+    """Used by the producer to request a new broker, if the initial one dies"""
     producer_id = request.args.get('producer_id', type=str)
     producer = producers[producer_id] 
     open_port = pick_unused_port()
