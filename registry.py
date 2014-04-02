@@ -42,6 +42,27 @@ def list_brokers():
         resp += "<p>" + str(producer) + "</p>"
     return resp
 
+
+@app.route("/request_new_broker", methods=['GET'])
+def request_new_broker():
+"""
+Used by the producer to request a new broker, if the initial one dies
+"""
+    producer_id = request.args.get('producer_id', type=str)
+    producer = producers[producer_id] 
+    open_port = pick_unused_port()
+    open_port2 = pick_unused_port()
+    BROKER_COMMAND = ['nohup','python', "broker.py", "-p" + str(open_port), "-t" + str(open_port2), "-s", str(producer.sensors)]
+    broker = subprocess.Popen(BROKER_COMMAND, stdout=open('/dev/null', 'w'), stderr=open('logfile.log', 'a'), preexec_fn=os.setpgrp, close_fds = True)
+    broker_address = "ws://localhost:" + str(open_port)
+    producer.broker_address = broker_address
+    producer.broker_pid = broker.pid
+    producers[producer_id] = producer
+    pickle.dump(producers, open( "producers.p", "wb" ))
+    response = {"broker_address" : producers[producer_id].broker_address}
+    response_json = json.dumps(response)
+    return response_json
+
 @app.route("/register_producer", methods=['GET'])
 def register_producer():
 
