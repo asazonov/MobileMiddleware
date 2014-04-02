@@ -16,7 +16,11 @@ The technologies used to develop the producer had to be easy to deploy on a mobi
 
 WebSockets is a protocol for full-duplex (two-way) communication through TCP. Additionally, compared to regular HTTP requests, WebSockets have a low header overhead (2 bytes compared to kilobytes in HTTP). Two-way communication and low overhead (thus, decreased latency and bandwidth usage) are advantageous for a data streaming platform. 
 
-WebSockets are supported by most of the modern desktop and mobile browsers (through Javascript APIs, without utilising any plugins), which makes it easy to use WebScokets-based communication in web-apps. Various libraries implement the WebSockets for other languages -- Python, Java, Go, etc. 
+WebSockets are supported by most of the modern desktop and mobile browsers (through Javascript APIs, without utilising any plugins), which makes it easy to use WebScokets-based communication in web-apps. Various libraries implement the WebSockets for other languages -- Python, Java, Go, etc.
+
+WAMP is a standard that builds upon WebSockets, providing some Pub-Sub and RPC functionality based through WebSockets. There are currently two versions of WAMP -- V1 and V2. The more stable, V1 was selected due to abundance of libraries implementing the standard.
+
+[http://wamp.ws/implementations/wamp1/]
 
 ### REST
 

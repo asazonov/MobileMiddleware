@@ -140,8 +140,6 @@ def get_relevant_producers(sensors, lat, lng, radius, max):
         print "======================"
 
     print ""
-    print ""
-    print ""
 
     for producer in producers.values():
 
