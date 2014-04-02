@@ -8,6 +8,7 @@ import random
 import string
 import sys
 import constants
+import signal
 from twisted.python import log
 from twisted.internet import reactor
 from autobahn.twisted.websocket import connectWS
@@ -25,6 +26,11 @@ lat = ""
 lng = ""
 producer_id = generate_random_data() # 30 characters, letters + digits
 heartbeats_skipped = 0
+
+def signal_handler(signal, frame):
+
+   reactor.stop()
+   sys.exit(0)
 
 def advertise_availability():
    """Declare location and available sensors to registry"""
@@ -60,12 +66,12 @@ class ProducerPubSubProtocol(WampClientProtocol):
    """Protocol class for the producer"""   
    def onSessionOpen(self):
 
-      print "Connected!"
-
       def onMyEvent1(topic, event):
          print "Received event", topic, event
-
-      self.counter = 0
+         
+      def heartbeat():
+         advertise_availability()
+         reactor.callLater(constants.HEARTBEAT_RATE, heartbeat)
 
       def start_publishing_sensor(sensor_name, every_n_seconds, lat, lng):
          self.publish(sensor_name,
@@ -75,29 +81,22 @@ class ProducerPubSubProtocol(WampClientProtocol):
                "timestamp" : str(datetime.datetime.now()),
                "lat" : str(lat),
                "lng" : str(lng)
-
             }
          )
-         reactor.callLater(every_n_seconds, start_publishing_sensor, sensor_name=sensor_name, every_n_seconds=every_n_seconds, lat=lat, lng=lng)
+         reactor.callLater(every_n_seconds, start_publishing_sensor, sensor_name=sensor_name, every_n_seconds=every_n_seconds, lat=lat, lng=lng)         
+
+      print "Connected!"
+      self.counter = 0
+      heartbeat()
 
       for sensor in sensors:
          self.subscribe(sensor, onMyEvent1)
          start_publishing_sensor(sensor, constants.PUBLISHING_INTERVAL, lat, lng)
+
+
+
       
-      def heartbeat():
-         advertise_availability()
-         reactor.callLater(constants.HEARTBEAT_RATE, heartbeat)
 
-      heartbeat()
-
-
-   # def onClose(self, wasClean, code, reason):
-   #    print "Connection closed", reason
-   #    if reason == constants.UNCLEAN_BROKER_DISCONNECT:
-   #       print "Broker dead. Re-initialising producer with registry"
-   #       replace_broker()
-   #    else:
-   #       reactor.stop()
 
 def replace_broker():
    payload = {'producer_id' : producer_id}
@@ -105,7 +104,7 @@ def replace_broker():
       req = requests.get(registry_address+"/replace_broker", params=payload)
       response_json = req.text
       response = json.loads(response_json)
-      time.sleep(2) # a dirty hack. We need to give time for the broker to initialise
+      time.sleep(1) # give time for the broker to initialise
       initialise_broker(response["broker_address"])
    except:
       print "Registry connectivity error - Unable to receive new broker"
@@ -118,9 +117,10 @@ def initialise_broker(socket_address):
    connectWS(factory)
 
 if __name__ == '__main__':
-
    log.startLogging(sys.stdout)
+   signal.signal(signal.SIGINT, signal_handler) 
 
+   # Deal with command line arguments
    parser = argparse.ArgumentParser()
    parser.add_argument('-t', '--tcp', type=int)
    parser.add_argument('-r', '--registry', type=str)
@@ -139,6 +139,9 @@ if __name__ == '__main__':
    lat = args.lat
    lng = args.lng
 
+
+   # Set up websocket connection with registry
    wsuri = advertise_availability()
-   initialise_broker(wsuri)  
+   initialise_broker(wsuri) 
+
    reactor.run()

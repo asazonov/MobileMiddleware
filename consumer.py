@@ -25,15 +25,11 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
    """
 
    def onSessionOpen(self):
-
       print "Connected to ", wsuri
       # reactor.callLater(constants.REDISCOVERY_INTERVAL, rediscover_brokers, current_brokers=global.current_brokers, max_brokers=global.max_brokers)
 
       def default_response(topic, event):
-         print "Received event", topic, event
-
-      # io_file = open("output/" + str(os.getpid()) + ".csv", 'w+')
-      # io_file.write("sensor,lat,lng,data,timestamp,time\n")
+         print "Received event: ", topic, event
       
       def save_to_file(topic, event):
          io_file.write(str(str(event['sensor']) + "," + event['lat']) + "," + str(event['lng']) + "," + str(event['data']) + "," + str(event['timestamp']) + "," + str((datetime.datetime.now() - datetime.datetime.strptime(event['timestamp'], "%Y-%m-%d %H:%M:%S.%f")).total_seconds()) + "\n")
@@ -59,13 +55,6 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
       #       factory.protocol = SensorDataConsumerClientProtocol
       #       connectWS(factory)
 
-
-      #self.subscribe("location", default_response)
-      #self.subscribe("http://example.com/myEvent1", default_response) # hardwired for testing
-
-   def clientConnectionLost(self, wasClean, code, reason):
-         print "### LOST CONNECTION : " + reason + " ###"
-
    def onClose(self, wasClean, code, reason):
          if ((not wasClean) and reason == constants.UNCLEAN_BROKER_DISCONNECT):
             current_brokers -= 1
@@ -73,6 +62,7 @@ class SensorDataConsumerClientProtocol(WampClientProtocol):
                exit(0)
 
 def request_broker_address(registry_address,location):
+   """Request one broker"""
    payload = {'location': location}
    req = requests.get(registry_address+"/request_broker", params=payload)
    response_json = req.text
@@ -80,6 +70,7 @@ def request_broker_address(registry_address,location):
    return response["broker_address"]
 
 def request_brokers_l(registry_address, location, radius, max_brokers, sensors):
+   """Request a list of up to max_brokers brokers based on a location string (e.g. "Moscow")"""
    payload = {'location': location, 'max_brokers' : max_brokers, 'radius' : radius, 'sensors' : sensors}
    req = requests.get(registry_address + "/request_brokers", params=payload)
    response_json = req.text
@@ -87,6 +78,7 @@ def request_brokers_l(registry_address, location, radius, max_brokers, sensors):
    return response
 
 def request_brokers_xy(registry_address, lat, lng, radius, max_brokers, sensors):
+   """Request a list of up to max_brokers brokers based on coordinates"""
    payload = {'lat': lat, 'lng' : lng, 'max_brokers' : max_brokers, 'radius' : radius, 'sensors' : sensors}
    req = requests.get(registry_address + "/request_brokers", params=payload)
    response_json = req.text
@@ -94,9 +86,9 @@ def request_brokers_xy(registry_address, lat, lng, radius, max_brokers, sensors)
    return response
 
 if __name__ == '__main__':
-
    log.startLogging(sys.stdout)
-
+   
+   # Deal with command line arguments
    parser = argparse.ArgumentParser()
    parser.add_argument('-r', '--registry', type=str)
    parser.add_argument('-s', '--sensors') #, nargs='+', type=str)
