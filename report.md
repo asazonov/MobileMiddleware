@@ -1,4 +1,5 @@
 % Service-oriented middleware for mobile sensing
+% 110015230, 110006876
 
 # Goals
 

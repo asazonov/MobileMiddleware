@@ -1,21 +1,41 @@
 import subprocess
 import time 
+import os
+import signal
 
 
 def test_broker_scalability(upper_bound):
+    consumer_list = []
     p1 = subprocess.Popen(['python', 'registry.py'])
     time.sleep(5) # Give time for the registry to start
-    p2 = subprocess.Popen(['python', 'producer.py', '-r', 'http://127.0.0.1:5000', '-s', 'camera,microphone,location', '--lat', '51.755826', '--lng', '37.6173', '-o', '100']) 
+    p2 = subprocess.Popen(['python', 'producer.py', '-r', 'http://127.0.0.1:5000', '-s', 'camera,microphone,location', '--lat', '55.75', '--lng', '37.61']) 
     time.sleep(5) # Give time for the producer to register
 
     for x in range(upper_bound):
-    	subprocess.Popen(['python', 'client.py', '-r', 'http://127.0.0.1:5000', '-p' 'Warsaw', '-c' 'camera,microphone,location'])
-    	#time.sleep(2)
-    exit_codes = [p.wait() for p in p1, p2]
+        consumer_list.append(subprocess.Popen(['python', 'consumer.py', '-r', 'http://127.0.0.1:5000', '-x' '55.75', '-y', '37.61', '-d', '500', '--maxbrokers', '1', '-s', 'camera,microphone,location', '-o', str(upper_bound) + '-' + str(x) ]))
+        time.sleep(0.35)
+
+
+    #exit_codes = [p.wait() for p in p1, p2]
+
+    time.sleep(60)
+    for consumer in consumer_list:
+    	print "============ kill" 
+        os.kill(consumer.pid, signal.SIGKILL)
+
+    os.kill(p2.pid, signal.SIGKILL)    
+    p3 = subprocess.Popen(['python', 'consumer.py', '-r', 'http://127.0.0.1:5000', '-x' '55.75', '-y', '37.61', '-d', '500', '--maxbrokers', '1', '-s', 'camera,microphone,location', '-o', str("1") + '-' + str(x) ])
+
+    os.kill(p1.pid, signal.SIGKILL)
+    os.kill(p3.pid, signal.SIGKILL)
+
+
 
 
 def main():
-	test_broker_scalability(100)
+	consumer_bounds = [10, 20, 50, 100, 150, 200, 250, 300]
+	for consumer_bound in consumer_bounds:
+		test_broker_scalability(consumer_bound)
 
 
 if  __name__ =='__main__':main()

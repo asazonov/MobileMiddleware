@@ -172,3 +172,227 @@ nohup: ignoring input
 nohup: ignoring input
 nohup: ignoring input
 nohup: ignoring input
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
+/Library/Python/2.7/site-packages/zope.interface-4.0.5-py2.7-macosx-10.9-intel.egg/zope/__init__.py:3: UserWarning: Module twisted was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/twisted/__init__.pyc, but /Library/Python/2.7/site-packages/autobahn-0.8.0-py2.7.egg is being added to sys.path
+  import pkg_resources
+/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/zope/__init__.py:3: UserWarning: Module logging was already imported from /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/logging/__init__.pyc, but /Library/Python/2.7/site-packages is being added to sys.path
+  import pkg_resources
